@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -18,6 +20,9 @@ public class VentanaAcierto extends JDialog{
     JButton btnSalir;
     JButton btnEstadistica;
     JButton btnSiguiente;
+    
+    VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta(true);
+    Archivo objetoArchivoDos = new Archivo();
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -62,6 +67,47 @@ public class VentanaAcierto extends JDialog{
         panelBotones.add(btnSiguiente);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
+        oyenteAccionBotonSiguiente();
     }
+    
+    
+    public void oyenteAccionBotonSiguiente()
+    {
+        System.out.println("ME EJECUTO YO EL OYENTE DE ACCIÓN");
+        ActionListener oyente = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                
+                //Este codigo es el que seguita la primera rama alternativa de git 
+               int posicionAEnviar;
+               String numeroRespuestaString;
+               numeroRespuestaString = objetoArchivoDos.leerArchivo("DocumentoConNumeroRespuesta.txt");
+               posicionAEnviar = Integer.parseInt(numeroRespuestaString);
+               objetoVentanaBeta.asignacionRutasAbsolutas(objetoVentanaBeta.getCopiaAudio(), objetoVentanaBeta.getCopiaImagenes(),posicionAEnviar);
+               objetoVentanaBeta.inicializarBotones();
+               dispose();
+
+
+                /*
+                Con estas 3 lineas el programa realiza las funciones basiscas que quiero que haga 
+                la cuestion es que me pregunto si existira un problema en que cada vez que ponga en marcha 
+                este oyente se creé un objeto, ¿Qué es lo que pasa con los anterires objetos que se han creado ?
+                ¿ Pueden existir dos objetos de la misma clase con el mismo nombre?
+                ¿Por qué la primera ventana no se cierra sino hasta que se cierra esta se cierra la primera ?
+                
+                
+                VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta();
+                ventana.setVisible(true);
+                dispose();
+
+*/
+            }
+        };
+        btnSiguiente.addActionListener(oyente);
+    }
+
+
     
 }

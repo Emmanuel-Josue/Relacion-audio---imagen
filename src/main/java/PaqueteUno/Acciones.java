@@ -16,6 +16,8 @@ import javax.sound.sampled.*;
  */
 public class Acciones {
     
+    int numeroAleatorio;
+    
     ArrayList imagenes = new ArrayList();
     ArrayList audio = new ArrayList();
     
@@ -37,6 +39,7 @@ public class Acciones {
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\9 erase.png");
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\10 change.png");
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\11 walk.png");
+        imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\12 close.png");
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\13 date.png");
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\14 cook.png");
         imagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\15 consider.png");
@@ -172,7 +175,7 @@ public class Acciones {
         return audio;
     }
     
-    public int[] numeroAleatorio(int rangoNumeros)
+    public int[] arregloNumeroAleatorio(int rangoNumeros)
     {
         Random aleatorio=new Random();
         int [] arregloN=new int[rangoNumeros];
@@ -201,6 +204,13 @@ public class Acciones {
         }
     
         return arregloN;
+    }
+    
+    public int numeroAleatorio(int rangoNumeros)
+    {
+        Random aleatorio=new Random();
+        this.numeroAleatorio = aleatorio.nextInt(rangoNumeros);
+        return this.numeroAleatorio;
     }
     
     
