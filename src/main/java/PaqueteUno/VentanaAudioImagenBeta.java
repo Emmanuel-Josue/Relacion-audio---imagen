@@ -29,9 +29,11 @@ import javax.swing.JToggleButton;
 public class VentanaAudioImagenBeta extends JFrame{
     
     /*
-        * Insvestigar el algoritmo de obtener un número aleatorio y luego de eso 
-            cacar a ese número de la lista 
-        * Preparar los botones para recibir las rutas de las imagenes 
+        * diseñar un constructor que inicialize todo pero con las colecciones 
+          modificadas 
+        * ver que algoritmo implementare para que en el caso de que la ventana se cierre 
+          de forma abrupta todo vuelba a su normalidad, cuando esto ocurra ¿seria mejor 
+          gurdar el avance del usuario o que el programa comience desde cero?
     
     
     */
@@ -83,6 +85,11 @@ public class VentanaAudioImagenBeta extends JFrame{
     public void iniciarComponentes()
     {
         panelPrincipal();
+        panelImagenes();
+        asignacionRutasAbsolutas();// Este método debe ir antes para que al inicializarse los botoes ya tengan una ruta asignada 
+        inicializarBotones();
+        panelBotonAudio();
+        botonAudio();
     }
     
     public void panelPrincipal()
@@ -92,21 +99,12 @@ public class VentanaAudioImagenBeta extends JFrame{
         panelPrincipal.setLayout(new BorderLayout());//Investigar como funciona el border layout, colocar los siguientes paneles anto arriba como abajao center y este 
         panelPrincipal.setBackground(Color.red);
         this.add(panelPrincipal);
-        panelImagenes();
-        panelBotonAudio();
-        // Revisar como funcionan las excepciones
-        botonAudio();
-        
-        
     }
     public void panelImagenes()
     {
         System.out.println("Se ejecuta método panelImagenes\n\n");
         panelImagenes = new JPanel();
         panelImagenes.setLayout(new GridLayout(2,2));
-        
-        asignacionRutasAbsolutas();// Este método debe ir antes para que al inicializarse los botoes ya tengan una ruta asignada 
-        inicializarBotones();
         
     }
     public void asignacionRutasAbsolutas()
@@ -328,11 +326,9 @@ public class VentanaAudioImagenBeta extends JFrame{
         System.out.println("Numero enviado por el boton"+numeroBotonPrecionado);
         System.out.println("Numero de la imagen (respuesta) "+cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta]);
         if(numeroBotonPrecionado == cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta])
-        {
-            System.out.println("Entra el if");
-            objetoArchivo.crearArchivo("DocumentoConNumeroRespuesta.txt");
-            System.out.println(Integer.toString(numeroRespuesta));
-            objetoArchivo.añadirTexto(Integer.toString(numeroRespuesta));//se comvierte el int a String y se manda al archivo 
+        { 
+            guardarElementosActuales();
+            //objetoArchivo.añadirTexto(Integer.toString(numeroRespuesta));//se comvierte el int a String y se manda al archivo 
             VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
             ventana.setVisible(true);
             dispose();
@@ -342,6 +338,30 @@ public class VentanaAudioImagenBeta extends JFrame{
             System.out.println("Entra el else ");
             VentanaError ventana = new VentanaError(new JFrame(),true);
             ventana.setVisible(true);
+        }
+    }
+    public void guardarElementosActuales()
+    {
+        if(objetoArchivo.getArchivo().exists())
+        {
+            objetoArchivo.getArchivo().delete();
+            copiaAudio.remove(numeroRespuesta);
+            copiaImagenes.remove(numeroRespuesta);
+            objetoArchivo.crearArchivo("Elementos actuales en la colección.txt");
+                for(int i=0;i<copiaAudio.size();i++)
+                {
+                    objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
+                }
+        }
+        else
+        {
+            copiaAudio.remove(numeroRespuesta);
+            copiaImagenes.remove(numeroRespuesta);
+            objetoArchivo.crearArchivo("DocumentoConNumeroRespuesta.txt");
+                for(int i=0;i<copiaAudio.size();i++)
+                {
+                    objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
+                }
         }
     }
     

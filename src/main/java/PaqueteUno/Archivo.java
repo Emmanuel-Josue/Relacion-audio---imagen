@@ -11,8 +11,24 @@ import java.io.IOException;
 
 public class Archivo {
     
-    File archivo;
-    String cadena;
+    private File archivo;
+    private String cadena;
+
+    public File getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(File archivo) {
+        this.archivo = archivo;
+    }
+
+    public String getCadena() {
+        return cadena;
+    }
+
+    public void setCadena(String cadena) {
+        this.cadena = cadena;
+    }
     
     
     public void crearArchivo(String nombreArchivo)
