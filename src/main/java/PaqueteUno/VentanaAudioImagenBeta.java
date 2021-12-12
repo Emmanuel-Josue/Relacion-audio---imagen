@@ -29,8 +29,10 @@ import javax.swing.JToggleButton;
 public class VentanaAudioImagenBeta extends JFrame{
     
     /*
-        * diseñar un constructor que inicialize todo pero con las colecciones 
-          modificadas 
+        * En la clase archivo hay que hacer dos metodos para escribir en él, el primero 
+          será para empezar a escribir y el segundo para añadir texto a este archivo
+        * En el método guardarElementosActuales hay que ver como podemos resolver la excepcion 
+          que manda cuando colocamos el if para decidir se se borra el archivo o no se borra 
         * ver que algoritmo implementare para que en el caso de que la ventana se cierre 
           de forma abrupta todo vuelba a su normalidad, cuando esto ocurra ¿seria mejor 
           gurdar el avance del usuario o que el programa comience desde cero?
@@ -342,24 +344,44 @@ public class VentanaAudioImagenBeta extends JFrame{
     }
     public void guardarElementosActuales()
     {
-        if(objetoArchivo.getArchivo().exists())
+        // Funciona, solo hay que implementar el if para decidir si se borra el archivo 
+        // actual o no. 
+        try
         {
-            objetoArchivo.getArchivo().delete();
-            copiaAudio.remove(numeroRespuesta);
-            copiaImagenes.remove(numeroRespuesta);
-            objetoArchivo.crearArchivo("Elementos actuales en la colección.txt");
-                for(int i=0;i<copiaAudio.size();i++)
-                {
-                    objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
-                }
+            System.out.println("Entra el TRY");
+            if(objetoArchivo.getArchivo().exists())
+            {
+                System.out.println("Entra el IF del TRY");
+                objetoArchivo.getArchivo().delete();
+                copiaAudio.remove(numeroRespuesta);
+                copiaImagenes.remove(numeroRespuesta);
+                objetoArchivo.crearArchivo();
+                System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
+                    for(int i=0;i<copiaAudio.size();i++)
+                    {
+                        System.out.println("Enta el for del método guardarElementosActuales");
+                        System.out.println("La cantidad de elementos en la colección es de "+copiaAudio.size());
+                        System.out.println((String) copiaAudio.get(i));
+                        objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
+                    }
+        
+            }
+            else
+            {
+                System.out.println("Ocurrio un error, el método .exists devolvio un false");
+            }
         }
-        else
+        catch(NullPointerException objetoDeLaExcepcion)
         {
+            System.out.println("Se ejecuta el CATCH");
             copiaAudio.remove(numeroRespuesta);
             copiaImagenes.remove(numeroRespuesta);
-            objetoArchivo.crearArchivo("DocumentoConNumeroRespuesta.txt");
+            objetoArchivo.crearArchivo();
                 for(int i=0;i<copiaAudio.size();i++)
                 {
+                    System.out.println("Enta el for del método guardarElementosActuales");
+                    System.out.println("La cantidad de elementos en la colección es de "+copiaAudio.size());
+                    System.out.println((String) copiaAudio.get(i));
                     objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
                 }
         }
