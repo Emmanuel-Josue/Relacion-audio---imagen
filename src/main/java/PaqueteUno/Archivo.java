@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class Archivo {
     
+    // No sé cómo funciona el constructor File, ya que no crea un archivo. 
+    // ¿Qué va a pasar cuando quiera crear un archivo diferente?
     private File archivo = new File("DocumentoConNumeroRespuesta.txt");;
     private String cadena;
 
@@ -37,8 +39,8 @@ public class Archivo {
         // .txt
         //El ID nos marca error cuando existen errores que se puedan dar por default al 
         //tansolo crear un archivo, nos brinda la opcion de implementar el try - catch
-        try {
-            //archivo = new File("DocumentoConNumeroRespuesta.txt");
+        try 
+        {
             if(archivo.createNewFile())
             {
                 System.out.println("El archivo se ha creado sin problema.");

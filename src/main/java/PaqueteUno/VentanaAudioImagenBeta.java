@@ -40,7 +40,12 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     */
     
-    
+    /*
+    Notas para dejar en el programa 
+    La variable numeroRespuesta es la posición que se leliminara de 
+    la colección, no coincide con la enumeración que se le dio a las 
+    imagenes y audios 
+    */
     
     private JPanel panelPrincipal;
     private JPanel panelImagenes;
@@ -58,7 +63,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     private String rutaAbsolutaAudio;
     private int indiceNumeroAleatorioRespuesta;
     private int cantidadElementosColeccion;
-    private int numeroRespuesta;
+    private int numeroRespuesta;// Es la posición de la respuesta(imagen o audio) que se ha elegido de las colecciones  
     
     ArrayList copiaImagenes = new ArrayList();
     ArrayList copiaAudio = new ArrayList();
@@ -84,10 +89,12 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     }
     
+    
     public void iniciarComponentes()
     {
         panelPrincipal();
         panelImagenes();
+        duplicacionColecciones();
         asignacionRutasAbsolutas();// Este método debe ir antes para que al inicializarse los botoes ya tengan una ruta asignada 
         inicializarBotones();
         panelBotonAudio();
@@ -109,11 +116,13 @@ public class VentanaAudioImagenBeta extends JFrame{
         panelImagenes.setLayout(new GridLayout(2,2));
         
     }
-    public void asignacionRutasAbsolutas()
+    public void duplicacionColecciones()
     {
-        System.out.println("Se ejecuta método asignacionRutasAbsolutas\n");
         copiaAudio = objetoAcciones.coleccionAudio();
         copiaImagenes = objetoAcciones.coleccionImagenes();
+    }
+    public void asignacionRutasAbsolutas()
+    {
         //El rango debe ser el número de imagenes que tenemos, este debe ir cambian-
         //do conforme se vallan quitando los elementos de la colección
         cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(67);
@@ -124,27 +133,12 @@ public class VentanaAudioImagenBeta extends JFrame{
         rutaAbsolutaImagenCuatro = (String) copiaImagenes.get(cuatroNumerosAleatorios[3]);
         numeroRespuesta = cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta];
         rutaAbsolutaAudio = (String) copiaAudio.get(numeroRespuesta);
-        System.out.println("La ruta del audio es:  "+rutaAbsolutaAudio);
-        System.out.println("La ruta de imagen 1:"+rutaAbsolutaImagenUno);
-        System.out.println("La ruta de imagen 2:"+rutaAbsolutaImagenDos);
-        System.out.println("La ruta de imagen 3:"+rutaAbsolutaImagenTres);
-        System.out.println("La ruta de imagen 4:"+rutaAbsolutaImagenCuatro);
-        
-        System.out.println(cuatroNumerosAleatorios[0]);
-        System.out.println(cuatroNumerosAleatorios[1]);
-        System.out.println(cuatroNumerosAleatorios[2]);
-        System.out.println(cuatroNumerosAleatorios[3]);
-        System.out.println("Numero de respuesta"+cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta]);
         
     }
+    
+    //Este método aún no se utiliza
     public void asignacionRutasAbsolutas(ArrayList copiaAudioActual, ArrayList copiaImagenesActual, int posicionAEliminar)
     {
-        //verificar que este modificando los arreglos de copias con los que se empezo. 
-        System.out.println("Variable posicion a eliminar: "+posicionAEliminar);
-        System.out.println("La variable numeroAleatorioRespuesta_: " + indiceNumeroAleatorioRespuesta);
-        System.out.println("El número a borrar de la lista es: "+cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta]);
-        copiaAudioActual.remove(posicionAEliminar);
-        copiaImagenesActual.remove(posicionAEliminar);
         cantidadElementosColeccion = copiaAudioActual.size();//tome esta colección, pero igualmente se puede utilizar la colección de imagenes
        
         cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(cantidadElementosColeccion-1);
@@ -324,34 +318,29 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     public void comparacionNumeros(int numeroBotonPrecionado)
     {
-        System.out.println("Entra método comparacionNumeros");
-        System.out.println("Numero enviado por el boton"+numeroBotonPrecionado);
-        System.out.println("Numero de la imagen (respuesta) "+cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta]);
         if(numeroBotonPrecionado == cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta])
         { 
             guardarElementosActuales();
-            //objetoArchivo.añadirTexto(Integer.toString(numeroRespuesta));//se comvierte el int a String y se manda al archivo 
             VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
             ventana.setVisible(true);
             dispose();
         }
         else
         {
-            System.out.println("Entra el else ");
             VentanaError ventana = new VentanaError(new JFrame(),true);
             ventana.setVisible(true);
         }
     }
     public void guardarElementosActuales()
     {
-        // Funciona, solo hay que implementar el if para decidir si se borra el archivo 
-        // actual o no. 
+        //El archivo que se utiliza aquí, se estara creando y eliminando 
+        //constantemente, es un archivo que guarda temporalmete las direcciones 
+        //de los elementos utilizados que no se han seleccionado como respuesta, por
+        //esta razon no se lleva un control en git de este mismo. 
         try
         {
-            System.out.println("Entra el TRY");
             if(objetoArchivo.getArchivo().exists())
             {
-                System.out.println("Entra el IF del TRY");
                 objetoArchivo.getArchivo().delete();
                 copiaAudio.remove(numeroRespuesta);
                 copiaImagenes.remove(numeroRespuesta);
