@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -20,9 +21,6 @@ public class VentanaAcierto extends JDialog{
     JButton btnSalir;
     JButton btnEstadistica;
     JButton btnSiguiente;
-    
-    VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta(true);
-    Archivo objetoArchivoDos = new Archivo();
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -87,7 +85,7 @@ public class VentanaAcierto extends JDialog{
                 ¿Por qué la primera ventana no se cierra sino hasta que se cierra esta se cierra la primera ?
                 */
                 
-                VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta();
+                VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta(false);
                 ventana.setVisible(true);
                 dispose();
 

@@ -69,36 +69,59 @@ public class VentanaAudioImagenBeta extends JFrame{
     ArrayList copiaAudio = new ArrayList();
     int[] cuatroNumerosAleatorios = new int[4];
     
-    Acciones objetoAcciones = new Acciones();
-    Archivo objetoArchivo = new Archivo();
+    private Acciones objetoAcciones = new Acciones();
+    private Archivo objetoArchivo = new Archivo();
+
     
     
-    public VentanaAudioImagenBeta()
+    public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
-        //creo que el diseño es el de por defecto 
-        setSize(600,600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-        setLocationRelativeTo(null);// Centramos la ventana 
-        setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
-        iniciarComponentes();    
+        if(verdaderoFalso)
+        {
+            //debe entrar solamente si es la primera vez que se comenzara el programa
+            //creo que el diseño es el de por defecto 
+            setSize(600,600);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+            setLocationRelativeTo(null);// Centramos la ventana 
+            setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+            iniciarComponentes(verdaderoFalso); 
+        }
+        else
+        {
+            setSize(600,600);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+            setLocationRelativeTo(null);// Centramos la ventana 
+            setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+            iniciarComponentes(verdaderoFalso); 
+        }
     }
     //Lo creo para poder crear objetos en otras clases sin inicializar todo el 
     //código de la ventana
-    public VentanaAudioImagenBeta(boolean verdaderoFalso)
+    public VentanaAudioImagenBeta()
     {
     
     }
     
     
-    public void iniciarComponentes()
+    public void iniciarComponentes(boolean verdaderoFalso)
     {
-        panelPrincipal();
-        panelImagenes();
-        duplicacionColecciones();
-        asignacionRutasAbsolutas();// Este método debe ir antes para que al inicializarse los botoes ya tengan una ruta asignada 
-        inicializarBotones();
-        panelBotonAudio();
-        botonAudio();
+        if(verdaderoFalso)
+        {
+            //debe entrar solamente si es la primera vez que se comenzara el programa
+            panelPrincipal();
+            panelImagenes();
+            duplicacionColecciones();
+            asignacionRutasAbsolutas();// Este método debe ir antes para que al inicializarse los botoes ya tengan una ruta asignada 
+            inicializarBotones();
+            panelBotonAudio();
+            botonAudio();
+        }
+        else
+        {
+            panelPrincipal();
+            panelImagenes();
+            obtencionRutasColeccion();
+        }
     }
     
     public void panelPrincipal()
@@ -111,7 +134,6 @@ public class VentanaAudioImagenBeta extends JFrame{
     }
     public void panelImagenes()
     {
-        System.out.println("Se ejecuta método panelImagenes\n\n");
         panelImagenes = new JPanel();
         panelImagenes.setLayout(new GridLayout(2,2));
         
@@ -120,6 +142,33 @@ public class VentanaAudioImagenBeta extends JFrame{
     {
         copiaAudio = objetoAcciones.coleccionAudio();
         copiaImagenes = objetoAcciones.coleccionImagenes();
+    }
+    public void obtencionRutasColeccion()
+    {
+       
+        //PASO LO QUE PENSE, CON WHILE SE UBIERA CREADO UN BUCLE, NECESITO MODIFICAR EL METODO leerArchivo
+        
+        //Utilizo este for por que asi sé que de alguna manera tiene un limite y se acabara 
+        // con un while se corre el riesgo de que se forme un bucle 
+        for(int iterador = 0;iterador<70;iterador++)
+        {
+            System.out.println("Entra el primer for ");
+            System.out.println(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt"));
+            //Como la coleccion en este punto esta vacia se debe agregar mas no establer
+        copiaAudio.add(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt"));
+            if(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt") == null)
+            {
+                System.out.println("El método leerArchivo devovio un objeto NULO");
+            }
+            else
+            {
+            // no se hace nada
+            }
+        }
+        for(int i=0;i<copiaAudio.size();i++)
+        {
+            System.out.println((String)copiaAudio.get(i));
+        }
     }
     public void asignacionRutasAbsolutas()
     {
@@ -348,8 +397,6 @@ public class VentanaAudioImagenBeta extends JFrame{
                 System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
                     for(int i=0;i<copiaAudio.size();i++)
                     {
-                        System.out.println("Enta el for del método guardarElementosActuales");
-                        System.out.println("La cantidad de elementos en la colección es de "+copiaAudio.size());
                         System.out.println((String) copiaAudio.get(i));
                         objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
                     }

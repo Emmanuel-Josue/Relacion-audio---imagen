@@ -93,7 +93,7 @@ public class VentanaDos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRelacionAudioImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelacionAudioImagenActionPerformed
-        VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta();
+        VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta(true);
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRelacionAudioImagenActionPerformed
