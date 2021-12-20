@@ -156,7 +156,9 @@ public class VentanaAudioImagenBeta extends JFrame{
     //REFINAR ESTE MÉTODO
     public void obtencionRutasColeccion()
     {
-        
+        System.out.println("-----------------Entra el método obtencionRutasColeccion---------------");
+        System.out.println("El número de elementos en la colección copiaAudio es de: "+copiaAudio.size());
+        System.out.println("El número de elementos en la colección copiaAudio es de: "+copiaImagenes.size());
         if(copiaAudio.size() != 0 & copiaImagenes.size() != 0)
         {
             System.out.println("ENTRA EL IF DEL MÉTODO obtencionRutasColeccion--------------------");
@@ -386,7 +388,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     public void comparacionNumeros(int numeroBotonPrecionado)
     {
-        if(numeroBotonPrecionado == cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta])
+        if(numeroBotonPrecionado == numeroRespuesta)
         { 
             System.out.println("Número a eliminar es: "+numeroRespuesta);
             guardarElementosActuales(archivoImagenes, copiaImagenes);
@@ -403,47 +405,30 @@ public class VentanaAudioImagenBeta extends JFrame{
     }
     public void guardarElementosActuales(File archivo,ArrayList coleccionGuardar)
     {
+        System.out.println("-------------------entra metodo guardarElementosActuales---------------------");
         //El archivo que se utiliza aquí, se estara creando y eliminando 
         //constantemente, es un archivo que guarda temporalmete las direcciones 
         //de los elementos utilizados que no se han seleccionado como respuesta, por
         //esta razon no se lleva un control en git de este mismo. 
-        
-        //ELIMINAR ESTE TRY __Parece que no hace falta ya que el archivo existira desde el principio---
-        try
+        if(archivo.exists())
         {
-            if(archivo.exists())
-            {
-                System.out.println("Entrael if del metodo gardarElementosActuales:  "+archivo.exists());
-                System.out.println(archivo.exists());
-                archivo.delete();
-                System.out.println("SE DEBIO BORRAR EL ARCHIVO ");
-                coleccionGuardar.remove(numeroRespuesta);
-                objetoArchivo.crearArchivo(archivo);
-                System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
-                    for(int i=0;i<coleccionGuardar.size();i++)
-                    {
-                        System.out.println((String) coleccionGuardar.get(i));
-                        objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
-                    }
+            System.out.println("Entrael if y el método .exists devuelve:  "+archivo.exists());
+            System.out.println("Se implementa el método de ELIMINACIÓN: "+archivo.delete());
+            System.out.println("El método .exists da como resulataod "+archivo.exists());
+            coleccionGuardar.remove(numeroRespuesta);
+            objetoArchivo.crearArchivo(archivo);
+            System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
+                for(int i=0;i<coleccionGuardar.size();i++)
+                {
+                //    System.out.println((String) coleccionGuardar.get(i));
+                    objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
+                }
+            System.out.println("Se elimino posicion y ahora la coleccion debe tener "+coleccionGuardar.size()+" elementos.");
         
-            }
-            else
-            {
-                System.out.println("Entra el ELSE del método guardarElementosActuales");
-                coleccionGuardar.remove(numeroRespuesta);
-                objetoArchivo.crearArchivo(archivo);
-                    for(int i=0;i<coleccionGuardar.size();i++)
-                    {
-                        System.out.println("Enta el for del método guardarElementosActuales");
-                        System.out.println("La cantidad de elementos en la colección es de "+coleccionGuardar.size());
-                        System.out.println((String) coleccionGuardar.get(i));
-                        objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
-                    }
-            }
         }
-        catch(NullPointerException objetoDeLaExcepcion)
+        else
         {
-            System.out.println("Se ejecuta el CATCH");
+            System.out.println("Entra el ELSE del método guardarElementosActuales");
             coleccionGuardar.remove(numeroRespuesta);
             objetoArchivo.crearArchivo(archivo);
                 for(int i=0;i<coleccionGuardar.size();i++)
@@ -454,6 +439,7 @@ public class VentanaAudioImagenBeta extends JFrame{
                     objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
                 }
         }
+
     }
     
     public ArrayList getCopiaAudio()
