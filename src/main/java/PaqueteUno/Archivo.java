@@ -7,15 +7,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Archivo {
     
     // No sé cómo funciona el constructor File, ya que no crea un archivo. 
     // ¿Qué va a pasar cuando quiera crear un archivo diferente?
-    private File archivo = new File("DocumentoConNumeroRespuesta.txt");;
+//--    private File archivo = new File("DocumentoConNumeroRespuesta.txt");
     private String cadena;
+    ArrayList coleccion = new ArrayList();
 
+    /*
     public File getArchivo() {
         return archivo;
     }
@@ -31,9 +34,10 @@ public class Archivo {
     public void setCadena(String cadena) {
         this.cadena = cadena;
     }
+*/
     
     
-    public void crearArchivo()
+    public void crearArchivo(File archivo)
     {
         //Siempre que se crea un archivo de texto la terminación o la extención debe ser
         // .txt
@@ -52,7 +56,7 @@ public class Archivo {
         }
     }
     
-    public void añadirTexto(String guardarTexto)
+    public void añadirTexto(String guardarTexto, File archivo)
     {
         try 
         {
@@ -73,25 +77,69 @@ public class Archivo {
         }
     }
     
-    public String leerArchivo(String nombreArchivo)
+    public ArrayList leerArchivo(String nombreArchivo)
     {
     
+        if(coleccion.size() == 0)
+        {
+            System.out.println("ENTRA EL MÉTODO leerArchivo en la opcion del if ");
         //Algoritmo para leer un archivo de texto. 
-        try {
-            FileReader lector = new FileReader(nombreArchivo);
-            BufferedReader lectura = new BufferedReader(lector);
-            cadena = lectura.readLine();
-            
-        } 
-        catch (FileNotFoundException ex) 
-        {
-            System.err.println("Error:  "+ex);
+            try 
+            {
+                FileReader lector = new FileReader(nombreArchivo);
+                BufferedReader lectura = new BufferedReader(lector);
+                cadena = lectura.readLine();
+                coleccion.add(cadena);
+                int iterador=0;
+                System.out.println("Entrara el WHILE");
+                while(cadena != null)
+                {
+                    System.out.println("Iterador: "+(iterador++));
+                    cadena = lectura.readLine();
+                    coleccion.add(cadena);
+                }
+                System.out.println("Sale el while");
+            } 
+            catch (FileNotFoundException ex) 
+            {
+                System.err.println("Error:  "+ex);
+            }
+            catch (IOException ex) 
+            {
+                System.err.println("Error: "+ex);
+            }
         }
-        catch (IOException ex) 
+        else
         {
-            System.err.println("Error: "+ex);
+            coleccion.clear();
+            //Algoritmo para leer un archivo de texto. 
+            try 
+            {
+                FileReader lector = new FileReader(nombreArchivo);
+                BufferedReader lectura = new BufferedReader(lector);
+                cadena = lectura.readLine();
+                coleccion.add(cadena);
+                int iterador=0;
+                System.out.println("Entrara el WHILE");
+                while(cadena != null)
+               {
+                    System.out.println("Iterador: "+(iterador++));
+                    cadena = lectura.readLine();
+                    coleccion.add(cadena);
+                }
+                System.out.println("Sale el while");
+            } 
+            catch (FileNotFoundException ex) 
+            {
+                System.err.println("Error:  "+ex);
+            }
+            catch (IOException ex) 
+            {
+                System.err.println("Error: "+ex);
+            }
+        
         }
-        return cadena;
+        return coleccion;
     }
     
 }

@@ -10,7 +10,10 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
@@ -67,12 +70,15 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     ArrayList copiaImagenes = new ArrayList();
     ArrayList copiaAudio = new ArrayList();
+    ArrayList coleccionTemporal = new ArrayList();
     int[] cuatroNumerosAleatorios = new int[4];
     
     private Acciones objetoAcciones = new Acciones();
     private Archivo objetoArchivo = new Archivo();
-
     
+    private File archivoImagenes = new File("Archivo con rutas de imagenes.txt");
+    private File archivoAudio = new File("Archivo con rutas de audios.txt");
+
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
@@ -120,7 +126,11 @@ public class VentanaAudioImagenBeta extends JFrame{
         {
             panelPrincipal();
             panelImagenes();
-            obtencionRutasColeccion();
+            obtencionRutasColeccion();//esto es lo cambia a diferencia del if
+            asignacionRutasAbsolutas();
+            inicializarBotones();
+            panelBotonAudio();
+            botonAudio();
         }
     }
     
@@ -143,38 +153,47 @@ public class VentanaAudioImagenBeta extends JFrame{
         copiaAudio = objetoAcciones.coleccionAudio();
         copiaImagenes = objetoAcciones.coleccionImagenes();
     }
+    //REFINAR ESTE MÉTODO
     public void obtencionRutasColeccion()
     {
-       
-        //PASO LO QUE PENSE, CON WHILE SE UBIERA CREADO UN BUCLE, NECESITO MODIFICAR EL METODO leerArchivo
         
-        //Utilizo este for por que asi sé que de alguna manera tiene un limite y se acabara 
-        // con un while se corre el riesgo de que se forme un bucle 
-        for(int iterador = 0;iterador<70;iterador++)
+        if(copiaAudio.size() != 0 & copiaImagenes.size() != 0)
         {
-            System.out.println("Entra el primer for ");
-            System.out.println(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt"));
-            //Como la coleccion en este punto esta vacia se debe agregar mas no establer
-        copiaAudio.add(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt"));
-            if(objetoArchivo.leerArchivo("DocumentoConNumeroRespuesta.txt") == null)
+            System.out.println("ENTRA EL IF DEL MÉTODO obtencionRutasColeccion--------------------");
+            copiaAudio.clear();
+            copiaImagenes.clear();
+        }
+        else
+        {
+            //ANALIZAR EL PORQUE DEBE DE SER ASÍ EL ALGORITMO 
+            coleccionTemporal = objetoArchivo.leerArchivo("Archivo con rutas de imagenes.txt");
+            for(int iterador = 0;iterador < coleccionTemporal.size();iterador++)//---------------------ESTA ESTRUCTURA PRINCIPALMETE ¿PORQUE NO PUEDE IR EL METODO EN ES PUNTO 
             {
-                System.out.println("El método leerArchivo devovio un objeto NULO");
+                copiaImagenes.add(coleccionTemporal.get(iterador));
             }
-            else
+            coleccionTemporal = objetoArchivo.leerArchivo("Archivo con rutas de audios.txt");
+            for(int iterador = 0;iterador < coleccionTemporal.size();iterador++)
             {
-            // no se hace nada
+                copiaAudio.add(coleccionTemporal.get(iterador));
             }
         }
+        System.out.println("COLECCIÓN AUDIO-----------------------------------------------------\n");
         for(int i=0;i<copiaAudio.size();i++)
         {
-            System.out.println((String)copiaAudio.get(i));
+            System.out.println("Posicion de la colección: "+i+" "+(String) copiaAudio.get(i));
         }
+        System.out.println("COLECCIÓN IMAGENES--------------------------------------------\n");
+        for(int i=0;i<copiaImagenes.size();i++)
+        {
+            System.out.println("Posición de la colección: "+i+" "+(String) copiaImagenes.get(i));
+        }
+        
     }
     public void asignacionRutasAbsolutas()
     {
         //El rango debe ser el número de imagenes que tenemos, este debe ir cambian-
         //do conforme se vallan quitando los elementos de la colección
-        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(67);
+        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(copiaAudio.size());//MODIFIQUE ESTA PARTE 
         indiceNumeroAleatorioRespuesta = objetoAcciones.numeroAleatorio(3);
         rutaAbsolutaImagenUno = (String) copiaImagenes.get(cuatroNumerosAleatorios[0]);
         rutaAbsolutaImagenDos = (String) copiaImagenes.get(cuatroNumerosAleatorios[1]);
@@ -369,7 +388,9 @@ public class VentanaAudioImagenBeta extends JFrame{
     {
         if(numeroBotonPrecionado == cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta])
         { 
-            guardarElementosActuales();
+            System.out.println("Número a eliminar es: "+numeroRespuesta);
+            guardarElementosActuales(archivoImagenes, copiaImagenes);
+            guardarElementosActuales(archivoAudio, copiaAudio);
             VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
             ventana.setVisible(true);
             dispose();
@@ -380,45 +401,57 @@ public class VentanaAudioImagenBeta extends JFrame{
             ventana.setVisible(true);
         }
     }
-    public void guardarElementosActuales()
+    public void guardarElementosActuales(File archivo,ArrayList coleccionGuardar)
     {
         //El archivo que se utiliza aquí, se estara creando y eliminando 
         //constantemente, es un archivo que guarda temporalmete las direcciones 
         //de los elementos utilizados que no se han seleccionado como respuesta, por
         //esta razon no se lleva un control en git de este mismo. 
+        
+        //ELIMINAR ESTE TRY __Parece que no hace falta ya que el archivo existira desde el principio---
         try
         {
-            if(objetoArchivo.getArchivo().exists())
+            if(archivo.exists())
             {
-                objetoArchivo.getArchivo().delete();
-                copiaAudio.remove(numeroRespuesta);
-                copiaImagenes.remove(numeroRespuesta);
-                objetoArchivo.crearArchivo();
+                System.out.println("Entrael if del metodo gardarElementosActuales:  "+archivo.exists());
+                System.out.println(archivo.exists());
+                archivo.delete();
+                System.out.println("SE DEBIO BORRAR EL ARCHIVO ");
+                coleccionGuardar.remove(numeroRespuesta);
+                objetoArchivo.crearArchivo(archivo);
                 System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
-                    for(int i=0;i<copiaAudio.size();i++)
+                    for(int i=0;i<coleccionGuardar.size();i++)
                     {
-                        System.out.println((String) copiaAudio.get(i));
-                        objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
+                        System.out.println((String) coleccionGuardar.get(i));
+                        objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
                     }
         
             }
             else
             {
-                System.out.println("Ocurrio un error, el método .exists devolvio un false");
+                System.out.println("Entra el ELSE del método guardarElementosActuales");
+                coleccionGuardar.remove(numeroRespuesta);
+                objetoArchivo.crearArchivo(archivo);
+                    for(int i=0;i<coleccionGuardar.size();i++)
+                    {
+                        System.out.println("Enta el for del método guardarElementosActuales");
+                        System.out.println("La cantidad de elementos en la colección es de "+coleccionGuardar.size());
+                        System.out.println((String) coleccionGuardar.get(i));
+                        objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
+                    }
             }
         }
         catch(NullPointerException objetoDeLaExcepcion)
         {
             System.out.println("Se ejecuta el CATCH");
-            copiaAudio.remove(numeroRespuesta);
-            copiaImagenes.remove(numeroRespuesta);
-            objetoArchivo.crearArchivo();
-                for(int i=0;i<copiaAudio.size();i++)
+            coleccionGuardar.remove(numeroRespuesta);
+            objetoArchivo.crearArchivo(archivo);
+                for(int i=0;i<coleccionGuardar.size();i++)
                 {
                     System.out.println("Enta el for del método guardarElementosActuales");
-                    System.out.println("La cantidad de elementos en la colección es de "+copiaAudio.size());
-                    System.out.println((String) copiaAudio.get(i));
-                    objetoArchivo.añadirTexto((String) copiaAudio.get(i)+"\r\n");            
+                    System.out.println("La cantidad de elementos en la colección es de "+coleccionGuardar.size());
+                    System.out.println((String) coleccionGuardar.get(i));
+                    objetoArchivo.añadirTexto((String) coleccionGuardar.get(i)+"\r\n", archivo);            
                 }
         }
     }
