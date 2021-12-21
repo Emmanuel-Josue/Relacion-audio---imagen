@@ -114,6 +114,7 @@ public class Archivo {
                     cadena = lectura.readLine();
                 }while(cadena != null);
                 System.out.println("Sale el DO while");
+                lectura.close();
             } 
             catch (FileNotFoundException ex) 
             {

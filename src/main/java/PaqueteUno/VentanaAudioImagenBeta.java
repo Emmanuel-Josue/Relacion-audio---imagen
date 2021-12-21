@@ -76,8 +76,8 @@ public class VentanaAudioImagenBeta extends JFrame{
     private Acciones objetoAcciones = new Acciones();
     private Archivo objetoArchivo = new Archivo();
     
-    private File archivoImagenes = new File("Archivo con rutas de imagenes.txt");
-    private File archivoAudio = new File("Archivo con rutas de audios.txt");
+    private File archivoImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de imagenes.txt");
+    private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de audios.txt");
 
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
