@@ -79,55 +79,42 @@ public class Archivo {
     
     public ArrayList leerArchivo(String nombreArchivo)
     {
+        System.out.println("-------------------Entra el método leerArchivo-------------");
+        
     
         if(coleccion.size() == 0)
         {
-            System.out.println("ENTRA EL MÉTODO leerArchivo en la opcion del if ");
-        //Algoritmo para leer un archivo de texto. 
-            try 
-            {
-                FileReader lector = new FileReader(nombreArchivo);
-                BufferedReader lectura = new BufferedReader(lector);
-                cadena = lectura.readLine();
-                coleccion.add(cadena);
-                int iterador=0;
-                System.out.println("Entrara el WHILE");
-                while(cadena != null)
-                {
-                    System.out.println("Iterador: "+(iterador++));
-                    cadena = lectura.readLine();
-                    coleccion.add(cadena);
-                }
-                System.out.println("Sale el while");
-            } 
-            catch (FileNotFoundException ex) 
-            {
-                System.err.println("Error:  "+ex);
-            }
-            catch (IOException ex) 
-            {
-                System.err.println("Error: "+ex);
-            }
+            System.out.println("ENTRO EL IF");
+            //Algoritmo para leer un archivo de texto. 
+            guardarElementos(nombreArchivo);
         }
         else
         {
+            System.out.println("Entro el else");
             coleccion.clear();
             //Algoritmo para leer un archivo de texto. 
-            try 
+            guardarElementos(nombreArchivo);
+        
+        }
+        return coleccion;
+    }
+    public void guardarElementos(String nombreArchivo)
+    {
+        try 
             {
                 FileReader lector = new FileReader(nombreArchivo);
                 BufferedReader lectura = new BufferedReader(lector);
+                //int iterador=0;
                 cadena = lectura.readLine();
-                coleccion.add(cadena);
-                int iterador=0;
-                System.out.println("Entrara el WHILE");
-                while(cadena != null)
-               {
-                    System.out.println("Iterador: "+(iterador++));
-                    cadena = lectura.readLine();
+                System.out.println("Entrara el DO WHILE");
+                do
+                {
+                    //System.out.println("Iterador: "+(iterador++));
                     coleccion.add(cadena);
-                }
-                System.out.println("Sale el while");
+                    cadena = lectura.readLine();
+                }while(cadena != null);
+                System.out.println("Sale el DO while");
+                lectura.close();
             } 
             catch (FileNotFoundException ex) 
             {
@@ -137,9 +124,6 @@ public class Archivo {
             {
                 System.err.println("Error: "+ex);
             }
-        
-        }
-        return coleccion;
     }
     
 }
