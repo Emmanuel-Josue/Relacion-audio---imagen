@@ -5,6 +5,8 @@
  */
 package PaqueteUno;
 
+import PaqueteVentanas.VentanaDos;
+
 /**
  *
  * @author user01
