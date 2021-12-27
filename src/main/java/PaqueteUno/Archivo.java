@@ -16,6 +16,7 @@ public class Archivo {
     // ¿Qué va a pasar cuando quiera crear un archivo diferente?
 //--    private File archivo = new File("DocumentoConNumeroRespuesta.txt");
     private String cadena;
+    private String rutaRespuesta;
     ArrayList coleccion = new ArrayList();
 
     /*
@@ -98,6 +99,26 @@ public class Archivo {
         }
         return coleccion;
     }
+    public String leerArachivo(String nombreArchivo)
+    {
+        try 
+        {
+            FileReader lector = new FileReader(nombreArchivo);
+            BufferedReader lectura = new BufferedReader(lector);
+            rutaRespuesta = lectura.readLine();
+            lectura.close();
+        } 
+        catch (FileNotFoundException ex) 
+        {
+            System.err.println("Error:  "+ex);
+        }
+        catch (IOException ex) 
+        {
+            System.err.println("Error: "+ex);
+        }
+        return rutaRespuesta;
+    }
+    
     public void guardarElementos(String nombreArchivo)
     {
         try 

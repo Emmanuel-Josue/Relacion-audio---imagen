@@ -1,10 +1,13 @@
 
 package PaqueteVentanas;
 
+import PaqueteUno.Archivo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -20,7 +23,11 @@ public class VentanaError extends JDialog{
     JPanel panelBotones;
     JButton btnSalir;
     JButton btnVerRespuesta;
-    JButton btnRegresar;
+    JButton btnRepetir;
+    private String rutaAudio;
+    
+    private Archivo objetoArchivo =new Archivo();
+    private VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta();
     
     public VentanaError(Frame parent, boolean modal)
     {
@@ -59,13 +66,47 @@ public class VentanaError extends JDialog{
         panelBotones.setBackground(Color.BLACK);
         btnSalir = new JButton("Salir");
         btnVerRespuesta = new JButton("Ver respuesta");
-        btnRegresar = new JButton("REGRESAR");
+        btnRepetir = new JButton("¡ REINTENTAR !");
         
         panelBotones.add(btnSalir);
         panelBotones.add(btnVerRespuesta);
-        panelBotones.add(btnRegresar);
+        panelBotones.add(btnRepetir);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
+        oyenteAccionBotonSalir();
+        oyenteAccionBotonRepetir();
+    }
+    public void oyenteAccionBotonSalir()
+    {
+        ActionListener oyente = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        };
+        btnSalir.addActionListener(oyente);
+    }
+    public void oyenteAccionBotonRepetir()
+    {
+        //En este método se trabajara un poco más ya que cada vez 
+        //que se repita alguna pregunta se contabilizara 
+        
+        //* Al cerrar la ventana se debe de repetir el audio, para lograr 
+        // esto hay que guardar la ruta absluta en un archivo 
+        ActionListener oyente = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta");
+                objetoVentanaBeta.reproducirAudio(rutaAudio);
+                dispose();
+            }
+        };
+        btnRepetir.addActionListener(oyente);
+    
     }
     
 }

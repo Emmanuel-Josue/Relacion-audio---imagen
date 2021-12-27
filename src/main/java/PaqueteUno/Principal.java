@@ -12,6 +12,7 @@ import PaqueteVentanas.VentanaDos;
  * @author user01
  */
 public class Principal {
+    
 
     /**
      * @param args the command line arguments

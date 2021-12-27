@@ -80,7 +80,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     
     private File archivoImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de imagenes.txt");
     private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de audios.txt");
-
+    private File archivoRespuestaCorrecta = new File("Archivo con respuesta correcta");
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
@@ -282,16 +282,16 @@ public class VentanaAudioImagenBeta extends JFrame{
         btnAudio = new JButton("AUDIO");
         btnAudio.setPreferredSize(new Dimension(600,50));
         panelBotonAudio.add(btnAudio);
-        reproducirAudio();
+        reproducirAudio(rutaAbsolutaAudio);
         oyenteAccionBotonAudio();
         
     }
-    public void reproducirAudio()
+    public void reproducirAudio(String direccionAudio)
     {
         try
         {
             //Esto es para que solo se ejecute una sola vez al abrise la ventana
-            File archivo = new File(rutaAbsolutaAudio);
+            File archivo = new File(direccionAudio);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -322,7 +322,7 @@ public class VentanaAudioImagenBeta extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                reproducirAudio();
+                reproducirAudio(rutaAbsolutaAudio);
             }
         };
         btnAudio.addActionListener(oyente);
@@ -401,6 +401,7 @@ public class VentanaAudioImagenBeta extends JFrame{
         }
         else
         {
+            guardarRutaRespuestaCorrecta(archivoRespuestaCorrecta, rutaAbsolutaAudio);
             VentanaError ventana = new VentanaError(new JFrame(),true);
             ventana.setVisible(true);
         }
@@ -414,9 +415,12 @@ public class VentanaAudioImagenBeta extends JFrame{
         //esta razon no se lleva un control en git de este mismo. 
         if(archivo.exists())
         {
+            /*
             System.out.println("Entrael if y el método .exists devuelve:  "+archivo.exists());
             System.out.println("Se implementa el método de ELIMINACIÓN: "+archivo.delete());
             System.out.println("El método .exists da como resulataod "+archivo.exists());
+*/
+            archivo.delete();
             coleccionGuardar.remove(numeroRespuesta);
             objetoArchivo.crearArchivo(archivo);
             System.out.println("Posición eliminada de la colección: "+ numeroRespuesta);
@@ -442,6 +446,20 @@ public class VentanaAudioImagenBeta extends JFrame{
                 }
         }
 
+    }
+    public void guardarRutaRespuestaCorrecta(File archivo, String rutaRespuesta)
+    {
+        if(archivo.exists())
+        {   
+            archivo.delete();
+            objetoArchivo.crearArchivo(archivo);
+            objetoArchivo.añadirTexto(rutaRespuesta, archivo);       
+        }
+        else
+        {
+            objetoArchivo.crearArchivo(archivo);
+            objetoArchivo.añadirTexto(rutaRespuesta, archivo);
+        }
     }
     
     public ArrayList getCopiaAudio()

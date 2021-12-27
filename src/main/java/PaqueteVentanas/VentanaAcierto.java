@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -66,6 +67,7 @@ public class VentanaAcierto extends JDialog{
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
         oyenteAccionBotonSiguiente();
+        oyenteAccionBotonSalir();
     }
     
     
@@ -94,6 +96,19 @@ public class VentanaAcierto extends JDialog{
         };
         btnSiguiente.addActionListener(oyente);
     }
+    public void oyenteAccionBotonSalir()
+    {
+        ActionListener oyente = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        };
+        btnSalir.addActionListener(oyente);
+    }
+    
 
 
     
