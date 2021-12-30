@@ -59,6 +59,8 @@ public class Archivo {
     
     public void añadirTexto(String guardarTexto, File archivo)
     {
+        //El error debe estar aqui ya que como el método es llamado dos veces no añade la línea solamente reescribe en el archivo sin guar-
+        // dar la informacion que ahi se encuentra
         try 
         {
             //Esta clase con su objeto, se utiliza para escribir en los archivos que tengamos.
@@ -99,13 +101,19 @@ public class Archivo {
         }
         return coleccion;
     }
-    public String leerArachivo(String nombreArchivo)
+    public String leerArachivo(String nombreArchivo, boolean obtenerRutaImagen)
     {
         try 
         {
             FileReader lector = new FileReader(nombreArchivo);
             BufferedReader lectura = new BufferedReader(lector);
             rutaRespuesta = lectura.readLine();
+            //para que automaticamente salte a leer la linea que necesito.
+            if(obtenerRutaImagen)
+            {
+                rutaRespuesta = lectura.readLine();
+            }
+            
             lectura.close();
         } 
         catch (FileNotFoundException ex) 

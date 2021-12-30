@@ -25,6 +25,7 @@ public class VentanaError extends JDialog{
     JButton btnVerRespuesta;
     JButton btnRepetir;
     private String rutaAudio;
+    private String rutaImagen;//Estas dos variables creo que pueden cumplir la misma función
     
     private Archivo objetoArchivo =new Archivo();
     private VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta();
@@ -75,6 +76,7 @@ public class VentanaError extends JDialog{
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
         oyenteAccionBotonSalir();
         oyenteAccionBotonRepetir();
+        oyenteAccionBotonVerRespuesta();
     }
     public void oyenteAccionBotonSalir()
     {
@@ -100,13 +102,30 @@ public class VentanaError extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta");
+                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta", false);
                 objetoVentanaBeta.reproducirAudio(rutaAudio);
                 dispose();
             }
         };
         btnRepetir.addActionListener(oyente);
     
+    }
+    public void oyenteAccionBotonVerRespuesta()
+    {
+        ActionListener oyente = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                //El procedimiento es bueno, pero lo utilizare en otra ventana, 
+                //en este boton solamente abrire otra ventana. 
+                rutaImagen = objetoArchivo.leerArachivo("Archivo con respuesta correcta", true);
+                System.out.println("La ruta obtenida es:  "+rutaImagen);
+                //Esta ruta sera utilizada para colocar la imagen en la etiqueta de la ventana 
+            }
+        };
+        btnVerRespuesta.addActionListener(oyente);
+        
     }
     
 }

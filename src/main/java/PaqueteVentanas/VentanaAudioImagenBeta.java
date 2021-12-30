@@ -66,6 +66,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     private String rutaAbsolutaImagenTres;
     private String rutaAbsolutaImagenCuatro;
     private String rutaAbsolutaAudio;
+    private String rutaAbsolutaImagen;
     private int indiceNumeroAleatorioRespuesta;
     private int cantidadElementosColeccion;
     private int numeroRespuesta;// Es la posición de la respuesta(imagen o audio) que se ha elegido de las colecciones  
@@ -205,6 +206,9 @@ public class VentanaAudioImagenBeta extends JFrame{
         rutaAbsolutaImagenCuatro = (String) copiaImagenes.get(cuatroNumerosAleatorios[3]);
         numeroRespuesta = cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta];
         rutaAbsolutaAudio = (String) copiaAudio.get(numeroRespuesta);
+        //variable para utilizar en método comparacionNumeros
+        rutaAbsolutaImagen = (String) copiaImagenes.get(numeroRespuesta);
+        
         
     }
     
@@ -401,7 +405,7 @@ public class VentanaAudioImagenBeta extends JFrame{
         }
         else
         {
-            guardarRutaRespuestaCorrecta(archivoRespuestaCorrecta, rutaAbsolutaAudio);
+            guardarRutaRespuestaCorrecta(archivoRespuestaCorrecta, rutaAbsolutaAudio, rutaAbsolutaImagen);
             VentanaError ventana = new VentanaError(new JFrame(),true);
             ventana.setVisible(true);
         }
@@ -447,18 +451,22 @@ public class VentanaAudioImagenBeta extends JFrame{
         }
 
     }
-    public void guardarRutaRespuestaCorrecta(File archivo, String rutaRespuesta)
+    //Optinizar este método si es que lo sigo utilizando en diferentes métodos
+    public void guardarRutaRespuestaCorrecta(File archivo, String rutaRespuestaAudio, String rutaRespuestaImagen)
     {
         if(archivo.exists())
         {   
+            //Existe un problema al llamar dos veces al método añadirTexto
             archivo.delete();
             objetoArchivo.crearArchivo(archivo);
-            objetoArchivo.añadirTexto(rutaRespuesta, archivo);       
+            objetoArchivo.añadirTexto(rutaRespuestaAudio, archivo);
+            objetoArchivo.añadirTexto(rutaRespuestaImagen, archivo); 
         }
         else
         {
             objetoArchivo.crearArchivo(archivo);
-            objetoArchivo.añadirTexto(rutaRespuesta, archivo);
+            objetoArchivo.añadirTexto(rutaRespuestaAudio, archivo); 
+            objetoArchivo.añadirTexto(rutaRespuestaImagen, archivo);
         }
     }
     
