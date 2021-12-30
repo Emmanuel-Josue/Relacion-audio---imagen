@@ -101,6 +101,8 @@ public class Archivo {
         }
         return coleccion;
     }
+    
+    //Este método lo invocare desde la ventana reforzar 
     public String leerArachivo(String nombreArchivo, boolean obtenerRutaImagen)
     {
         try 
@@ -109,6 +111,8 @@ public class Archivo {
             BufferedReader lectura = new BufferedReader(lector);
             rutaRespuesta = lectura.readLine();
             //para que automaticamente salte a leer la linea que necesito.
+            //porque en el archvo guardare dos rutas, la del audio y la de la imagen, la
+            //segunda será la de la imagen 
             if(obtenerRutaImagen)
             {
                 rutaRespuesta = lectura.readLine();
