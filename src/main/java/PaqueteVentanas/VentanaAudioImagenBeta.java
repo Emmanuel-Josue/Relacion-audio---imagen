@@ -459,7 +459,7 @@ public class VentanaAudioImagenBeta extends JFrame{
             //Existe un problema al llamar dos veces al método añadirTexto
             archivo.delete();
             objetoArchivo.crearArchivo(archivo);
-            objetoArchivo.añadirTexto(rutaRespuestaAudio, archivo);
+            objetoArchivo.añadirTexto(rutaRespuestaAudio+"\r\n", archivo);
             objetoArchivo.añadirTexto(rutaRespuestaImagen, archivo); 
         }
         else

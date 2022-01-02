@@ -8,9 +8,11 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -22,6 +24,8 @@ public class VentanaAcierto extends JDialog{
     JButton btnSalir;
     JButton btnEstadistica;
     JButton btnSiguiente;
+    private JButton btnReforzar;
+    private JLabel lblAcierto;
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -49,19 +53,24 @@ public class VentanaAcierto extends JDialog{
     public void panelEtiquetaAcierto()
     {
         panelEtiquetaAcierto = new JPanel();
-        panelEtiquetaAcierto.setBackground(Color.BLUE);
+        panelEtiquetaAcierto.setBackground(Color.WHITE);
+        panelEtiquetaAcierto.setLayout(new BorderLayout());
+        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes para el proyecto\\correcto1.jpg"));
+        panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }
     
     public void panelBotones()
     {
         panelBotones = new JPanel();
-        panelBotones.setBackground(Color.BLACK);
+        panelBotones.setBackground(Color.WHITE);
         btnSalir = new JButton("Salir");
         btnEstadistica = new JButton("Estadistica");
         btnSiguiente = new JButton("SIGUIENTE");
+        btnReforzar = new JButton("Reforzar");
         
         panelBotones.add(btnSalir);
+        panelBotones.add(btnReforzar);
         panelBotones.add(btnEstadistica);
         panelBotones.add(btnSiguiente);
         
