@@ -156,12 +156,14 @@ public class VentanaAudioImagenBeta extends JFrame{
         copiaAudio = objetoAcciones.coleccionAudio();
         copiaImagenes = objetoAcciones.coleccionImagenes();
     }
+    //Continuar en analizando este método. 
     //REFINAR ESTE MÉTODO
     public void obtencionRutasColeccion()
     {
         System.out.println("-----------------Entra el método obtencionRutasColeccion---------------");
         System.out.println("El número de elementos en la colección copiaAudio es de: "+copiaAudio.size());
         System.out.println("El número de elementos en la colección copiaAudio es de: "+copiaImagenes.size());
+        //Creo que este If es inecesario porque las colecciones en este punto nunca tendran elementos, pero, ¿Por qué?
         if(copiaAudio.size() != 0 & copiaImagenes.size() != 0)
         {
             System.out.println("ENTRA EL IF DEL MÉTODO obtencionRutasColeccion--------------------");
@@ -198,7 +200,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     {
         //El rango debe ser el número de imagenes que tenemos, este debe ir cambian-
         //do conforme se vallan quitando los elementos de la colección
-        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(copiaAudio.size());//MODIFIQUE ESTA PARTE 
+        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(copiaAudio.size()-1);//el -1 es porque si en un arreglo exiten 10 numero, como rango para el número aleatorio se debe pasar el número 9 ya que este toma en cuente el 0 
         indiceNumeroAleatorioRespuesta = objetoAcciones.numeroAleatorio(3);
         rutaAbsolutaImagenUno = (String) copiaImagenes.get(cuatroNumerosAleatorios[0]);
         rutaAbsolutaImagenDos = (String) copiaImagenes.get(cuatroNumerosAleatorios[1]);
@@ -212,21 +214,18 @@ public class VentanaAudioImagenBeta extends JFrame{
         
     }
     
-    //Este método aún no se utiliza
-    public void asignacionRutasAbsolutas(ArrayList copiaAudioActual, ArrayList copiaImagenesActual, int posicionAEliminar)
+    //Este método aún no se utiliza--------------------------------------------------------------------------------
+    public void asignacionRutasAbsolutas(ArrayList coleccionOriginalAudio, ArrayList coleccionOriginalImagenes, int posicionAEliminar)
     {
-        cantidadElementosColeccion = copiaAudioActual.size();//tome esta colección, pero igualmente se puede utilizar la colección de imagenes
-       
-        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(cantidadElementosColeccion-1);
-        indiceNumeroAleatorioRespuesta = objetoAcciones.numeroAleatorio(3);
-        rutaAbsolutaImagenUno = (String) copiaImagenes.get(cuatroNumerosAleatorios[0]);
-        rutaAbsolutaImagenDos = (String) copiaImagenes.get(cuatroNumerosAleatorios[1]);
-        rutaAbsolutaImagenTres = (String) copiaImagenes.get(cuatroNumerosAleatorios[2]);
-        rutaAbsolutaImagenCuatro = (String) copiaImagenes.get(cuatroNumerosAleatorios[3]);
-        //El númeroRespuesta deriva de los cuatro números aleatorios obtenidos ante-
-        //riormente y 1 numero aleatorio obtenido de estos cuatro. 
-        numeroRespuesta = cuatroNumerosAleatorios[indiceNumeroAleatorioRespuesta];
-        rutaAbsolutaAudio = (String) copiaAudio.get(numeroRespuesta);          
+        ArrayList coleccionAleatoriaRespuesta = new ArrayList();
+        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio((coleccionOriginalAudio.size())-1);//si existe un error revisar que no se deba a los parentesis
+        for(int i=0;i<cuatroNumerosAleatorios.length;i++)
+        {
+            coleccionAleatoriaRespuesta.add(coleccionOriginalAudio.get(cuatroNumerosAleatorios[i]));
+        }
+        //Hacer un método que me devuelva los cuatro números aleatorios y en estos, 
+        //no debe haber el numéro que sera la respuesta, para esto debo pasar como parametro el 
+        //numero(posición) que tiene la palabra(respuesta que sera la primera posicion de la colecciónTemporal) en la coleccion principal 
     }
     
     public void inicializarBotones()
