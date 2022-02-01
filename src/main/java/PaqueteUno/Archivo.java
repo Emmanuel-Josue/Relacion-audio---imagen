@@ -56,11 +56,26 @@ public class Archivo {
             System.err.print("El archivo no se ha creado correctamente. ");
         }
     }
+    public void escribirTextoInicial(String guardarTexto, File archivo)
+    {
+        //Método para escribir inicialmente un texto en algun archivo, si por algun motivo
+        //el archivo ya existe, este método borrara lo existente y escribira solamente lo que se digte 
+        // en la variable guardarTexto
+        try 
+        {
+            FileWriter escribir = new FileWriter(archivo);
+            escribir.write(guardarTexto);
+            escribir.close();
+            
+        } 
+        catch (IOException ex) 
+        {
+            System.err.println("NO SE HA PODIDO ESCRIVIR EN EL ARCHIVO");
+        }
+    }
     
     public void añadirTexto(String guardarTexto, File archivo)
     {
-        //El error debe estar aqui ya que como el método es llamado dos veces no añade la línea solamente reescribe en el archivo sin guar-
-        // dar la informacion que ahi se encuentra
         try 
         {
             //Esta clase con su objeto, se utiliza para escribir en los archivos que tengamos.

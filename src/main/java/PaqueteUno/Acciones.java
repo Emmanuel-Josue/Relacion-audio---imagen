@@ -16,15 +16,45 @@ import javax.sound.sampled.*;
  */
 public class Acciones {
     
-    int numeroAleatorio;
+    private int numeroAleatorio;
+    private int numeroPosicionEncontrada;
     
-    ArrayList imagenes = new ArrayList();
-    ArrayList audio = new ArrayList();
+    private ArrayList imagenes = new ArrayList();
+    private ArrayList audio = new ArrayList();
+    
+    private ArrayList coleccionParaPruebasImagenes = new ArrayList();
+    private ArrayList coleccionParaPruebasAudio = new ArrayList();
     
     public Acciones()
     {
     //Constructor
     }
+    public ArrayList coleccionImagenesPruebas()
+    {
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\1 open.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\2 accept.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\3 love.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\4 learn.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\5 hurry.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\6 dare.png");
+        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\7 help.png");
+        
+        return coleccionParaPruebasImagenes; 
+    
+    }
+    
+    public ArrayList coleccionAudioPruebas()
+    {
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\1 OPEN.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\2 ACCEPT.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\3 LOVE.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\4 LEARN.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\5 HURRY.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\6 DARE.wav");
+        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\7 HELP.wav");
+        
+        return coleccionParaPruebasAudio;
+    }    
     
     public ArrayList coleccionImagenes()
     {
@@ -177,17 +207,22 @@ public class Acciones {
     
     public int[] arregloNumeroAleatorio(int rangoNumeros)
     {
+        System.out.println("----------------------arregloNumeroAleatorio()----------------------------");
         Random aleatorio=new Random();
-        int [] arregloN=new int[rangoNumeros];
+        //el largo es cuatro porque es la cantidad de elementos que se necesita
+        int [] arregloN=new int[4];
         int iterador=1;
         //se agrega en () el rango del numero en el que se generara el aleatorio en este 
         //caso el rango es de 0-6, son 7 números en este rango 
         arregloN[0]=aleatorio.nextInt(rangoNumeros);
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);//REVISAR SI SI EL RANDO DE NUMEROS ABARCA TODO EL ARREGLO
+        System.out.println("Entran los bucles-----------<<<<<<<<<<<<");
+        System.out.println("---"+arregloN[0]);
         while(arregloN[0]==arregloN[iterador])
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         }
+        System.out.println("---"+arregloN[iterador]);
         ++iterador;
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
     
@@ -196,13 +231,55 @@ public class Acciones {
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         }
+        System.out.println("---"+arregloN[iterador]);
         ++iterador;
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         while(arregloN[0]==arregloN[iterador] || arregloN[1]==arregloN[iterador] || arregloN[2]==arregloN[iterador])
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         }
+        System.out.println("---"+arregloN[iterador]);
+        
+        System.out.println("SALEN LOS BUCLES----------------------->>>>>>>>>>>>>>>>>>");
     
+        return arregloN;
+    }
+    
+    public int[] arregloNumeroAleatorio(int rangoNumeros, int omitirNumero, int omitirPosicion)
+    {
+        Random aleatorio=new Random();
+        int [] arregloN=new int[4];
+        int iterador=1;
+        //se agrega en () el rango del numero en el que se generara el aleatorio en este 
+        //caso el rango es de 0-6, son 7 números en este rango 
+        do
+        {
+            arregloN[0]=aleatorio.nextInt(rangoNumeros);
+            
+        }while(omitirNumero == arregloN[0] || omitirPosicion == arregloN[0]);
+        System.out.println("---"+arregloN[0]);
+        arregloN[iterador]=aleatorio.nextInt(rangoNumeros);//REVISAR SI SI EL RANDO DE NUMEROS ABARCA TODO EL ARREGLO
+        while(arregloN[0]==arregloN[iterador] || omitirNumero == arregloN[iterador] || omitirPosicion == arregloN[iterador])
+        {
+            arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
+        }
+        System.out.println("---"+arregloN[iterador]);
+        ++iterador;
+        arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
+    
+        //Recordar que el simbolo || significa 'o' y sirve para enlazar condicionales 
+        while(arregloN[0]==arregloN[iterador] || arregloN[1]==arregloN[iterador] || omitirNumero == arregloN[iterador] || omitirPosicion == arregloN[iterador])
+        {
+            arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
+        }
+        System.out.println("---"+arregloN[iterador]);
+        ++iterador;
+        arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
+        while(arregloN[0]==arregloN[iterador] || arregloN[1]==arregloN[iterador] || arregloN[2]==arregloN[iterador] || omitirNumero == arregloN[iterador] || omitirPosicion == arregloN[iterador])
+        {
+            arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
+        }
+        System.out.println("---"+arregloN[iterador]);
         return arregloN;
     }
     
@@ -211,6 +288,19 @@ public class Acciones {
         Random aleatorio=new Random();
         this.numeroAleatorio = aleatorio.nextInt(rangoNumeros);
         return this.numeroAleatorio;
+    }
+    
+    public int numeroAOmitir(ArrayList coleccionOriginal, String rutaAOmitir)
+    {
+        for(int i=0; i<coleccionOriginal.size(); i++)
+        {
+            if(rutaAOmitir.equals((String) coleccionOriginal.get(i)))
+            {
+                numeroPosicionEncontrada = i;
+            }
+        }
+    
+        return numeroPosicionEncontrada;
     }
     
     
