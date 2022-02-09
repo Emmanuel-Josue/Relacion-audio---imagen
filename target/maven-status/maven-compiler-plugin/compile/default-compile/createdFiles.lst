@@ -17,6 +17,7 @@ PaqueteVentanas\VentanaError.class
 PaqueteVentanas\VentanaDos.class
 PaqueteVentanas\VentanaAcierto$1.class
 PaqueteVentanas\VentanaAudioImagen$3.class
+PaqueteVentanas\VentanaError$3.class
 PaqueteVentanas\VentanaAudioImagen$2.class
 PaqueteVentanas\VentanaDos$1.class
 PaqueteUno\Archivo.class
