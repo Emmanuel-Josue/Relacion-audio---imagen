@@ -71,8 +71,7 @@ public class VentanaAudioImagenBeta extends JFrame{
     private int indiceNumeroAleatorioRespuesta;
     private int numeroRespuesta;// Es la posición de la respuesta(imagen o audio) que se ha elegido de las colecciones  
     private int numeroAleatorioACambiar;
-    private String numeroCadenaConteoRondas = ".";
-    private int numeroConteoRondas;
+
     private boolean abrirVentanaAcierto = true;
     private boolean coleccionCorta;
     private int omitirNumero;
@@ -88,7 +87,8 @@ public class VentanaAudioImagenBeta extends JFrame{
     private File archivoImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de imagenes.txt");
     private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de audios.txt");
     private File archivoRespuestaCorrecta = new File("Archivo con respuesta correcta.txt");
-    private File archivoConteoRondas = new File("Archivo con conteo de las ultimas tres rondas.txt");
+    
+    private File archivoTresRutas = new File("Archivo con ultimas rutas.txt");
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
@@ -250,20 +250,6 @@ public class VentanaAudioImagenBeta extends JFrame{
         System.out.println("----------------------asignacionRutasAbsolutas(MÉTODO DOS)----------------------------");
         //generamos un número aleatorio, el cual decidira que número(ruta) se va a reemplazar. 
         numeroAleatorioACambiar = objetoAcciones.numeroAleatorio(4);
-        if(archivoConteoRondas.exists())//se creo y se coloco el número "0"
-        {
-            numeroCadenaConteoRondas = objetoArchivo.leerArachivo("Archivo con conteo de las ultimas tres rondas.txt", false);
-            numeroRespuesta = Integer.parseInt(numeroCadenaConteoRondas);
-            System.out.println("El conteo de las ultimas tres rondas va en: "+numeroCadenaConteoRondas);
-            
-        }
-        else
-        {
-            System.out.println("No existe el archivo que guarda al control de cuantas veces se ha entrado al arreglo de los ulimos 3 elementos ");
-        }
-        
-        //se envia las colecciones con rutas de imagenes, aunque tambien podrian ser las de audio 
-        //Numero a omitir es la posición que originalmetne tenia la ruta en la coleccioón original 
         omitirNumero = objetoAcciones.numeroAOmitir(coleccionOriginalImagenes,(String) copiaImagenes.get(numeroRespuesta));
         
         cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio((coleccionOriginalImagenes.size()),omitirNumero,numeroRespuesta);//si existe un error revisar que no se deba a los parentesis
@@ -473,31 +459,17 @@ public class VentanaAudioImagenBeta extends JFrame{
         if(numeroBotonPrecionado == numeroRespuesta)
         { 
             System.out.println("Número a eliminar es: "+numeroRespuesta);
-            if(copiaImagenes.size() <= 4 & copiaAudio.size() <= 4)
-            {
-                
-                if(archivoConteoRondas.exists())
-                {
-                    //extraer lo que hay en el archivo, lo modifica y lo vuelve a ingresar
-                    sumarUnidadAlContenido();
-                    if(numeroCadenaConteoRondas.equals("4"))//Debe entrar solamente la quinta vez para poder borrar el archivo
-                    {
-                        archivoConteoRondas.delete();
-                        abrirVentanaAcierto = false;
-                    }
-                    
-                }
-                else
-                {
-                    objetoArchivo.crearArchivo(archivoConteoRondas);
-                    //se agregara el numero cero
-                    objetoArchivo.escribirTextoInicial("0", archivoConteoRondas);
-                }
-            }
+            copiarUltimosTresElementos();
+            //En esta linea ira un algoritmo que determinara si aun hay preguntas por hacer, ósea, si hay rutas por 
+            //asignar a los botones y si no las hay entonces el valor de abrirVentanaAciero cambiara para que 
+            //el algoritmo no cambie 
+            abrirVentanaAcierto = verificacionExistenciaElementos();
+            
             if(abrirVentanaAcierto)
             {
                 guardarElementosActuales(archivoImagenes, copiaImagenes);
                 guardarElementosActuales(archivoAudio, copiaAudio);
+                
                 VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
                 ventana.setVisible(true);
                 dispose();
@@ -591,19 +563,45 @@ public class VentanaAudioImagenBeta extends JFrame{
         } 
     }
     
-    public void sumarUnidadAlContenido()
+    public void copiarUltimosTresElementos()
     {
-        System.out.println("------------------------sumarUnidadAlContenido()----------------------");
-        numeroCadenaConteoRondas = objetoArchivo.leerArachivo("Archivo con conteo de las ultimas tres rondas.txt", false);
-        numeroConteoRondas = Integer.parseInt(numeroCadenaConteoRondas);
-        System.out.println("Se objtiene la variable numeroConteoRondas que tiene el valor de: " + numeroConteoRondas);
-        numeroConteoRondas = ++numeroConteoRondas;// tambien es la posicion en la coleccion de los 3 elementos que sera la respuesta
-        System.out.println("Se itero una unidad a la variable numeroConteoRondas " + numeroConteoRondas);
-        numeroCadenaConteoRondas = Integer.toString(numeroConteoRondas);
-        objetoArchivo.escribirTextoInicial(numeroCadenaConteoRondas, archivoConteoRondas);
-        System.out.println("----------------------------------------------------------------------\n");
+        if(copiaImagenes.size() <= 3)
+        {
+            if(archivoTresRutas.exists())
+            {
+                //no se ara nada
+            }
+            else
+            {
+                objetoArchivo.crearArchivo(archivoTresRutas);
+                //lo siguiente es escribir en este archivo las ultimas tres rutas 
+                objetoArchivo.escribirTextoInicial( (String) copiaImagenes.get(0), archivoTresRutas);
+                for(int iterador = 1; iterador < 3; iterador++)
+                {
+                    objetoArchivo.añadirTexto((String) copiaImagenes.get(iterador), archivoTresRutas);
+                }
+
+            }
+        }
     }
     
+    public boolean verificacionExistenciaElementos()
+    {
+        boolean verdaderoFalso = true;
+        String existeRuta;
+        existeRuta = objetoArchivo.leerArachivo("Archivo con ultimas rutas.txt", false);
+        if(existeRuta.equals(""))
+        {
+            verdaderoFalso = false;
+        }
+        else
+        {
+            verdaderoFalso = true;
+        }
+        
+        return verdaderoFalso;
+    }
+
     public ArrayList getCopiaAudio()
     {
         return copiaAudio;
