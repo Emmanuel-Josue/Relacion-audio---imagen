@@ -29,32 +29,7 @@ public class Acciones {
     {
     //Constructor
     }
-    public ArrayList coleccionImagenesPruebas()
-    {
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\1 open.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\2 accept.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\3 love.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\4 learn.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\5 hurry.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\6 dare.png");
-        coleccionParaPruebasImagenes.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes verbos regulares\\7 help.png");
-        
-        return coleccionParaPruebasImagenes; 
-    
-    }
-    
-    public ArrayList coleccionAudioPruebas()
-    {
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\1 OPEN.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\2 ACCEPT.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\3 LOVE.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\4 LEARN.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\5 HURRY.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\6 DARE.wav");
-        coleccionParaPruebasAudio.add("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Audio verbos regulares WAV\\7 HELP.wav");
-        
-        return coleccionParaPruebasAudio;
-    }    
+   
     
     public ArrayList coleccionImagenes()
     {

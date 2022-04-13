@@ -102,7 +102,7 @@ public class VentanaAudioImagenBeta extends JFrame{
             //creo que el diseño es el de por defecto 
             setSize(600,600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-           // setLocationRelativeTo(null);// Centramos la ventana 
+            //setLocationRelativeTo(null);// Centramos la ventana 
             setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
             iniciarComponentes(verdaderoFalso); 
         }
@@ -187,13 +187,11 @@ public class VentanaAudioImagenBeta extends JFrame{
     }
     public void duplicacionColecciones()
     {
-        /*
+        
         copiaAudio = objetoAcciones.coleccionAudio();
         copiaImagenes = objetoAcciones.coleccionImagenes();
-        */
         
-        copiaAudio = objetoAcciones.coleccionAudioPruebas();
-        copiaImagenes = objetoAcciones.coleccionImagenesPruebas();
+        
     }
     //Continuar en analizando este método. 
     //REFINAR ESTE MÉTODO
