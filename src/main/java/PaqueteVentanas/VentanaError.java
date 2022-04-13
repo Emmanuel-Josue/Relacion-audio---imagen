@@ -101,7 +101,7 @@ public class VentanaError extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta", false);
+                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta.txt", false);
                 objetoVentanaBeta.reproducirAudio(rutaAudio);
                 dispose();
             }

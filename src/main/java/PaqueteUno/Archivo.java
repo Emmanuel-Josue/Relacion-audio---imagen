@@ -97,7 +97,7 @@ public class Archivo {
     
     public ArrayList leerArchivo(String nombreArchivo)
     {
-        System.out.println("-------------------Entra el método leerArchivo-------------");
+        System.out.println("-------------------Entra el método leerArchivo(String nombreArchivo)-------------");
         
     
         if(coleccion.size() == 0)
@@ -114,21 +114,22 @@ public class Archivo {
             guardarElementos(nombreArchivo);
         
         }
+        System.out.println("-----------------------------------------------------------------------------------");
         return coleccion;
     }
     
     //Este método lo invocare desde la ventana reforzar 
-    public String leerArachivo(String nombreArchivo, boolean obtenerRutaImagen)
+    public String leerArachivo(String nombreArchivo, boolean saltarLinea)
     {
         try 
         {
             FileReader lector = new FileReader(nombreArchivo);
             BufferedReader lectura = new BufferedReader(lector);
-            rutaRespuesta = lectura.readLine();
+            rutaRespuesta = lectura.readLine();            
             //para que automaticamente salte a leer la linea que necesito.
             //porque en el archvo guardare dos rutas, la del audio y la de la imagen, la
             //segunda será la de la imagen 
-            if(obtenerRutaImagen)
+            if(saltarLinea)
             {
                 rutaRespuesta = lectura.readLine();
             }
@@ -172,6 +173,36 @@ public class Archivo {
             {
                 System.err.println("Error: "+ex);
             }
+    }
+    
+    public void eliminarPrimeraLinea(File archivo, ArrayList coleccion, int posicionAEliminar)
+    {
+        System.out.println("------------------------------eliminarPrimeraLinea()-------------------------------------------------------");
+        if(archivo.exists())
+        {
+            archivo.delete();
+            coleccion.remove(posicionAEliminar);
+            crearArchivo(archivo);
+                for(int i=0;i<coleccion.size();i++)
+                {
+                //    System.out.println((String) coleccionGuardar.get(i));
+                    añadirTexto((String) coleccion.get(i)+"\r\n", archivo);            
+                }
+            System.out.println("Se elimino posicion y ahora la coleccion debe tener "+coleccion.size()+" elementos.");
+        
+        }
+        else
+        {
+            coleccion.remove(posicionAEliminar);
+            crearArchivo(archivo);
+                for(int i=0;i<coleccion.size();i++)
+                {
+                //    System.out.println((String) coleccionGuardar.get(i));
+                    añadirTexto((String) coleccion.get(i)+"\r\n", archivo);            
+                }
+            System.out.println("Se elimino posicion y ahora la coleccion debe tener "+coleccion.size()+" elementos.");
+        }
+        System.out.println("-------------------------------------------------------------------------------------------");
     }
     
 }

@@ -68,17 +68,20 @@ public class VentanaAudioImagenBeta extends JFrame{
     private String rutaAbsolutaImagenCuatro;
     private String rutaAbsolutaAudio;
     private String rutaAbsolutaImagen;
+    private String rutaAReemplazar;
     private int indiceNumeroAleatorioRespuesta;
     private int numeroRespuesta;// Es la posición de la respuesta(imagen o audio) que se ha elegido de las colecciones  
     private int numeroAleatorioACambiar;
+    private boolean reemplazarRuta;
 
     private boolean abrirVentanaAcierto = true;
     private boolean coleccionCorta;
     private int omitirNumero;
-    ArrayList copiaImagenes = new ArrayList();
-    ArrayList copiaAudio = new ArrayList();
-    ArrayList coleccionTemporal = new ArrayList();
+    private ArrayList copiaImagenes = new ArrayList();
+    private ArrayList copiaAudio = new ArrayList();
+    private ArrayList coleccionTemporal = new ArrayList();
     private ArrayList coleccionParaMostrarRespuestasFinales = new ArrayList();
+    private ArrayList coleccionUltimasRutas = new ArrayList();
     int[] cuatroNumerosAleatorios = new int[4];
     
     private Acciones objetoAcciones = new Acciones();
@@ -88,7 +91,8 @@ public class VentanaAudioImagenBeta extends JFrame{
     private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de audios.txt");
     private File archivoRespuestaCorrecta = new File("Archivo con respuesta correcta.txt");
     
-    private File archivoTresRutas = new File("Archivo con ultimas rutas.txt");
+    private File archivoTresRutasImagenes = new File("Archivo con ultimas rutas de imagenes.txt");
+    private File archivoTresRutasAudios = new File("Archivo con ultimas rutas de audios.txt");
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
@@ -98,7 +102,7 @@ public class VentanaAudioImagenBeta extends JFrame{
             //creo que el diseño es el de por defecto 
             setSize(600,600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-            setLocationRelativeTo(null);// Centramos la ventana 
+           // setLocationRelativeTo(null);// Centramos la ventana 
             setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
             iniciarComponentes(verdaderoFalso); 
         }
@@ -106,7 +110,7 @@ public class VentanaAudioImagenBeta extends JFrame{
         {
             setSize(600,600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-            setLocationRelativeTo(null);// Centramos la ventana 
+            //setLocationRelativeTo(null);// Centramos la ventana 
             setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
             iniciarComponentes(verdaderoFalso); 
         }
@@ -246,45 +250,38 @@ public class VentanaAudioImagenBeta extends JFrame{
     //HAY QUE ANALIZAR ESTE PUNTO 
     public void asignacionRutasAbsolutas(ArrayList coleccionOriginalImagenes)
     {
+        String rutaImagen, rutaAudio;
         System.out.println("--------------------------------------------\n\n");
         System.out.println("----------------------asignacionRutasAbsolutas(MÉTODO DOS)----------------------------");
         //generamos un número aleatorio, el cual decidira que número(ruta) se va a reemplazar. 
-        numeroAleatorioACambiar = objetoAcciones.numeroAleatorio(4);
-        omitirNumero = objetoAcciones.numeroAOmitir(coleccionOriginalImagenes,(String) copiaImagenes.get(numeroRespuesta));
-        
-        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio((coleccionOriginalImagenes.size()),omitirNumero,numeroRespuesta);//si existe un error revisar que no se deba a los parentesis
-        // se llena el arreglo en el cual reemplazaremos una ruta (objeto)
-        for(int i=0;i<cuatroNumerosAleatorios.length;i++)
+        numeroAleatorioACambiar = objetoAcciones.numeroAleatorio(4);      
+        rutaImagen = obtencionRuta("Archivo con ultimas rutas de imagenes.txt",archivoTresRutasImagenes);
+        rutaAudio = obtencionRuta("Archivo con ultimas rutas de audios.txt",archivoTresRutasAudios);//creo que el problama esta aqui, pero no lo puedeo detectasr 
+        cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(67);
+        rellenarColeccion(copiaImagenes, objetoAcciones.coleccionImagenes(), cuatroNumerosAleatorios);
+        rellenarColeccion(copiaAudio, objetoAcciones.coleccionAudio(), cuatroNumerosAleatorios);
+        if(verificacionRutasNoDuplicadas(rutaImagen, copiaImagenes) & verificacionRutasNoDuplicadas(rutaAudio, copiaAudio))
         {
-            coleccionParaMostrarRespuestasFinales.add(coleccionOriginalImagenes.get(cuatroNumerosAleatorios[i]));
+            //algoritmo para reemplazar ruta
+            copiaImagenes.set(numeroAleatorioACambiar,rutaImagen);
+            copiaAudio.set(numeroAleatorioACambiar, rutaAudio);
         }
-        //se obtienen las ultimas 3 rutas. Creo que este esta linea de código se puede quitar ya que este paso lo podeoms hacer en
-        //el constructor 
-        //coleccionTemporal = objetoArchivo.leerArchivo("Archivo con rutas de imagenes.txt");
+        else
+        {
+            //  no se hará nada. 
+        }
+        //SE MODIFICARA EL ARREGLO
+        cuatroNumerosAleatorios = reemplazarPosicionEnArreglo(cuatroNumerosAleatorios, numeroAleatorioACambiar);
+        rutaAbsolutaImagenUno = (String) copiaImagenes.get(0);
+        rutaAbsolutaImagenDos = (String) copiaImagenes.get(1);
+        rutaAbsolutaImagenTres = (String) copiaImagenes.get(2);
+        rutaAbsolutaImagenCuatro = (String) copiaImagenes.get(3);
+        numeroRespuesta = numeroAleatorioACambiar;
+        rutaAbsolutaAudio = (String)copiaAudio.get(numeroAleatorioACambiar);
+        rutaAbsolutaImagen = (String) copiaImagenes.get(numeroAleatorioACambiar);
         
-        //se reemplaza el objeto de la coleccion de los 4 elementos por la que será la 
-        //respuesta
-        coleccionParaMostrarRespuestasFinales.add(numeroAleatorioACambiar, copiaImagenes.get(numeroConteoRondas));
-        
-        //se asignas las rutas
-        //* La coleccion en este momento tiene las rutas de los audios 
-        rutaAbsolutaImagenUno = (String) coleccionParaMostrarRespuestasFinales.get(0);
-        rutaAbsolutaImagenDos = (String) coleccionParaMostrarRespuestasFinales.get(1);
-        rutaAbsolutaImagenTres = (String) coleccionParaMostrarRespuestasFinales.get(2);
-        rutaAbsolutaImagenCuatro = (String) coleccionParaMostrarRespuestasFinales.get(3);
-        //la variable númeroRespuesta no puede ser el numero original que la ruta tenia
-        //en la coleccion original porque 
-        //numeroRespuesta = numeroAleatorioACambiar;
-        rutaAbsolutaAudio = (String) copiaAudio.get(numeroRespuesta);
-        //variable para utilizar en método comparacionNumeros
-        rutaAbsolutaImagen = (String) copiaImagenes.get(numeroRespuesta);
-        
-        
-        //Generar tipo de método que indique la posición que se asignara para reemplazar el objeto en la 
-        //colección coleccionAleatroriaRespuesta, este método tendra que dar los números 0,1,2, tendra que guardar la posición
-        //, identificar que número sigue y si ya se ha llegado al 2 de alguna manera reiniciar todo 
-        
-        
+             
+
         System.out.println("--------------------------------------------------------------\n\n");
         
     }
@@ -459,17 +456,22 @@ public class VentanaAudioImagenBeta extends JFrame{
         if(numeroBotonPrecionado == numeroRespuesta)
         { 
             System.out.println("Número a eliminar es: "+numeroRespuesta);
-            copiarUltimosTresElementos();
-            //En esta linea ira un algoritmo que determinara si aun hay preguntas por hacer, ósea, si hay rutas por 
-            //asignar a los botones y si no las hay entonces el valor de abrirVentanaAciero cambiara para que 
-            //el algoritmo no cambie 
-            abrirVentanaAcierto = verificacionExistenciaElementos();
+            //El problema a arreglar está aquí, la sentencia no puede entrar sin 
+            //antes borrar el elemento cuarto y esto sucede hasta que enetre el if pero para que 
+            // se puede ejecutar el if se necesta ejecutar este elemento y entrar la sentencia que 
+            //esta dentro de él.
+            
+            //En estos parametros podemos enviar cualquiera de los dos archios ya que 
+            //deben de tener los mismos elementos a la par. 
+            abrirVentanaAcierto = verificacionExistenciaElementos(archivoTresRutasImagenes, "Archivo con ultimas rutas de imagenes.txt");
             
             if(abrirVentanaAcierto)
             {
                 guardarElementosActuales(archivoImagenes, copiaImagenes);
                 guardarElementosActuales(archivoAudio, copiaAudio);
-                
+                copiarUltimosTresElementos(archivoTresRutasImagenes,copiaImagenes);
+            
+                copiarUltimosTresElementos(archivoTresRutasAudios,copiaAudio);
                 VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
                 ventana.setVisible(true);
                 dispose();
@@ -478,6 +480,9 @@ public class VentanaAudioImagenBeta extends JFrame{
             {
                 //abriremos una ventana indicando que se han repasado todas las palabras 
                 System.out.println("El programa se ha terminado");
+                archivoTresRutasImagenes.delete();
+                archivoTresRutasAudios.delete();
+                System.exit(0);
             }
         }
         else
@@ -563,57 +568,129 @@ public class VentanaAudioImagenBeta extends JFrame{
         } 
     }
     
-    public void copiarUltimosTresElementos()
+    public void copiarUltimosTresElementos(File archivo, ArrayList coleccion)
     {
-        if(copiaImagenes.size() <= 3)
+        System.out.println("-------------COPIAR ULTIMOS TRES ELEMENTOS()---------------------------");
+        if( copiaImagenes.size() <= 3 )
         {
-            if(archivoTresRutas.exists())
+            System.out.println("ENTR EL IF COPIAIMAGENES.SIZE");
+            if( archivo.exists() )
             {
                 //no se ara nada
             }
             else
             {
-                objetoArchivo.crearArchivo(archivoTresRutas);
-                //lo siguiente es escribir en este archivo las ultimas tres rutas 
-                objetoArchivo.escribirTextoInicial( (String) copiaImagenes.get(0), archivoTresRutas);
-                for(int iterador = 1; iterador < 3; iterador++)
+                objetoArchivo.crearArchivo(archivo);
+                for(int iterador = 0; iterador < 3; iterador++)
                 {
-                    objetoArchivo.añadirTexto((String) copiaImagenes.get(iterador), archivoTresRutas);
+                    objetoArchivo.añadirTexto( (String) coleccion.get(iterador) + "\r\n", archivo);
                 }
 
             }
         }
+        System.out.println("----------------------------------------------------------------------------");
     }
     
-    public boolean verificacionExistenciaElementos()
+    public boolean verificacionExistenciaElementos(File archivo, String nombreArchivo)
     {
+        System.out.println("------------------------------------verificacionExistenciaElementos---------------------------------------");
         boolean verdaderoFalso = true;
-        String existeRuta;
-        existeRuta = objetoArchivo.leerArachivo("Archivo con ultimas rutas.txt", false);
-        if(existeRuta.equals(""))
-        {
-            verdaderoFalso = false;
+        if(archivo.exists())
+        {   
+            try
+            {
+                //Introduciendo el try creo que ya no es necesaria la sentencia if, pero se necesita par 
+                // que se pueda activar el try 
+                String existeRuta;
+                existeRuta = objetoArchivo.leerArachivo(nombreArchivo, false);
+                System.out.println("La cadena obtenida es: "+existeRuta);
+                if(existeRuta.equals(""))
+                {
+                    verdaderoFalso = false;
+                }
+                else
+                {
+                    verdaderoFalso = true;
+                }
+            }
+            catch(java.lang.NullPointerException e)
+            {
+                verdaderoFalso = false;
+            }
         }
         else
         {
             verdaderoFalso = true;
         }
         
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
         return verdaderoFalso;
+        
     }
 
-    public ArrayList getCopiaAudio()
+    public String obtencionRuta(String nombreArchivo, File archivo)
     {
-        return copiaAudio;
-    }
-    public ArrayList getCopiaImagenes()
-    {
-        return copiaImagenes;
-    }
-    
-    public int getNumeroRespuesta()
-    {
-        return numeroRespuesta;
+        System.out.println("--------------------------------obtencionRuta()--------------------------------------");
+        coleccionUltimasRutas.clear();//verificar si esta linea es necesaria.
+        rutaAReemplazar = objetoArchivo.leerArachivo(nombreArchivo,false);
+        coleccionUltimasRutas = objetoArchivo.leerArchivo(nombreArchivo);
+        objetoArchivo.eliminarPrimeraLinea(archivo, coleccionUltimasRutas, 0);
+        System.out.println("---------------------------------------------------------------------------------------");
+        return rutaAReemplazar;
     }
     
+    public void rellenarColeccion(ArrayList coleccionARellenar, ArrayList coleccionRecurso,int[] arreglo )
+    {
+        coleccionARellenar.clear();
+        for(int i = 0; i < arreglo.length; i++)
+        {
+            coleccionARellenar.add( (String) coleccionRecurso.get( arreglo[i] ) );
+        }
+        
+    }
+    // debolvera false si hay que reemplazar la ruta 
+    public boolean verificacionRutasNoDuplicadas(String ruta, ArrayList coleccionAVerificar)
+    {
+        String cadena;
+        for(int i = 0; i < coleccionAVerificar.size(); i++)
+        {
+            cadena = (String) coleccionAVerificar.get(i);
+            if(cadena.equals(ruta))
+            {
+                reemplazarRuta = false;
+                i = coleccionAVerificar.size();//para que termine el bucle.
+            }
+            else
+            {
+                reemplazarRuta = true;
+                  
+            }
+        }
+        return reemplazarRuta;
+    }
+    public void reemplazarRuta(ArrayList coleccion, int posicionAReemplazar, String ruta)
+    {
+        coleccion.set(posicionAReemplazar, ruta);
+    }
+    public int[] reemplazarPosicionEnArreglo(int[] arreglo, int posicionACambiar)
+    {
+        int[] arregloCopia = new int[4];
+        for(int i = 0; i < arregloCopia.length; i++)
+        {
+            arregloCopia[i] = arreglo[i];
+        }
+        for(int i = 0; i < arreglo.length; i++)
+        {
+            if( i != posicionACambiar)
+            {
+                arreglo[i] = arregloCopia[i];
+            }
+            else
+            {
+               arreglo[i] = posicionACambiar; //sera al mismo tiempo la posicion que se comarara para hayar la respuesta 
+            }
+        }
+        return arreglo;
+    }
+
 }

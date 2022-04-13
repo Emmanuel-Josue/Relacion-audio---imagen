@@ -31,7 +31,7 @@ public class VentanaAcierto extends JDialog{
     {
         super(parent, modal);//volver a investigar esta linea. 
         setSize(600,300);
-        setLocationRelativeTo(null);// Centramos la ventana 
+        //setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
         iniciarComponentes();
     }  

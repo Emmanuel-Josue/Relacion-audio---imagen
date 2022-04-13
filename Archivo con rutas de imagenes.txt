@@ -1,3 +1,3 @@
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\1 open.png
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\3 love.png
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\7 help.png
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\29 like.png
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\19 start.png
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\24 wait.png
