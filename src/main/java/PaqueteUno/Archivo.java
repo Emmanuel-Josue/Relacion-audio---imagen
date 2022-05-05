@@ -17,7 +17,7 @@ public class Archivo {
 //--    private File archivo = new File("DocumentoConNumeroRespuesta.txt");
     private String cadena;
     private String rutaRespuesta;
-    ArrayList coleccion = new ArrayList();
+    private ArrayList coleccion = new ArrayList();
 
     /*
     public File getArchivo() {

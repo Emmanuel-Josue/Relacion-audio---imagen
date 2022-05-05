@@ -8,8 +8,10 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -18,13 +20,13 @@ import javax.swing.JPanel;
  */
 public class VentanaError extends JDialog{
     
-    JPanel panelPrincipal;
-    JPanel panelEtiquetaError;
-    JPanel panelBotones;
-    JButton btnSalir;
-    JButton btnVerRespuesta;
-    JButton btnRepetir;
+    private JPanel panelPrincipal;
+    private JPanel panelEtiquetaError;
+    private JPanel panelBotones;
+    private JButton btnSalir;
+    private JButton btnRepetir;
     private String rutaAudio;
+    private JLabel lblError;
     
     private Archivo objetoArchivo =new Archivo();
     private VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta();
@@ -56,7 +58,10 @@ public class VentanaError extends JDialog{
     public void panelEtiquetaError()
     {
         panelEtiquetaError = new JPanel();
-        panelEtiquetaError.setBackground(Color.GREEN);
+        panelEtiquetaError.setBackground(Color.BLACK);
+        panelEtiquetaError.setLayout(new BorderLayout());
+        lblError = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes para el proyecto\\Error.jpg"));
+        panelEtiquetaError.add(lblError, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaError, BorderLayout.CENTER);
     }
     
@@ -65,17 +70,14 @@ public class VentanaError extends JDialog{
         panelBotones = new JPanel();
         panelBotones.setBackground(Color.BLACK);
         btnSalir = new JButton("Salir");
-        btnVerRespuesta = new JButton("Ver respuesta");
         btnRepetir = new JButton("¡ REINTENTAR !");
         
         panelBotones.add(btnSalir);
-        panelBotones.add(btnVerRespuesta);
         panelBotones.add(btnRepetir);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
         oyenteAccionBotonSalir();
         oyenteAccionBotonRepetir();
-        oyenteAccionBotonVerRespuesta();
     }
     public void oyenteAccionBotonSalir()
     {
@@ -108,20 +110,6 @@ public class VentanaError extends JDialog{
         };
         btnRepetir.addActionListener(oyente);
     
-    }
-    public void oyenteAccionBotonVerRespuesta()
-    {
-        ActionListener oyente = new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            { 
-                //en este boton solamente abrire otra ventana. 
-                
-            }
-        };
-        btnVerRespuesta.addActionListener(oyente);
-        
     }
     
 }

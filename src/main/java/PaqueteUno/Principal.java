@@ -6,6 +6,7 @@
 package PaqueteUno;
 
 import PaqueteVentanas.VentanaDos;
+import PaqueteVentanas.VentanaUno;
 /**
  *
  * @author user01
@@ -22,7 +23,7 @@ public class Principal {
         
         
                
-        VentanaDos ventana = new VentanaDos();
+        VentanaUno ventana = new VentanaUno();
         ventana.setVisible(true);
         
        

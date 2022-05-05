@@ -26,19 +26,16 @@ public class VentanaDos extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jpanelUno = new javax.swing.JPanel();
         jPanelDos = new javax.swing.JPanel();
         btnRelacionAudioImagen = new javax.swing.JButton();
         btnRelacionImagenAudio = new javax.swing.JButton();
-        jPanelMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpanelUno.setPreferredSize(new java.awt.Dimension(600, 300));
-        jpanelUno.setLayout(new java.awt.GridBagLayout());
+        jpanelUno.setLayout(new java.awt.GridLayout());
 
         jPanelDos.setPreferredSize(new java.awt.Dimension(600, 225));
         jPanelDos.setLayout(new java.awt.GridLayout(2, 0));
@@ -54,6 +51,7 @@ public class VentanaDos extends javax.swing.JFrame {
 
         btnRelacionImagenAudio.setText("Relacion imagen - audio");
         btnRelacionImagenAudio.setAlignmentY(0.0F);
+        btnRelacionImagenAudio.setPreferredSize(new java.awt.Dimension(159, 150));
         btnRelacionImagenAudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelacionImagenAudioActionPerformed(evt);
@@ -61,46 +59,22 @@ public class VentanaDos extends javax.swing.JFrame {
         });
         jPanelDos.add(btnRelacionImagenAudio);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        jpanelUno.add(jPanelDos, gridBagConstraints);
-
-        jPanelMenu.setMinimumSize(new java.awt.Dimension(600, 75));
-        jPanelMenu.setLayout(new java.awt.BorderLayout());
-
-        btnRegresar.setText("jButton3");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jPanelMenu.add(btnRegresar, java.awt.BorderLayout.WEST);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jpanelUno.add(jPanelMenu, gridBagConstraints);
+        jpanelUno.add(jPanelDos);
 
         getContentPane().add(jpanelUno, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+    private void btnRelacionImagenAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelacionImagenAudioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    }//GEN-LAST:event_btnRelacionImagenAudioActionPerformed
 
     private void btnRelacionAudioImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelacionAudioImagenActionPerformed
         VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta(true);
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRelacionAudioImagenActionPerformed
-
-    private void btnRelacionImagenAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelacionImagenAudioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRelacionImagenAudioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,11 +112,9 @@ public class VentanaDos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRelacionAudioImagen;
     private javax.swing.JButton btnRelacionImagenAudio;
     private javax.swing.JPanel jPanelDos;
-    private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jpanelUno;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,11 +36,19 @@ public class VentanaUno extends javax.swing.JFrame {
         jButton4.setText("jButton4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 400));
         getContentPane().setLayout(new java.awt.GridLayout(1, 1));
 
         jPanelUno.setLayout(new java.awt.GridLayout(3, 1));
 
         btnVerbosRegulares.setText("Verbos regulares");
+        btnVerbosRegulares.setPreferredSize(new java.awt.Dimension(124, 22));
+        btnVerbosRegulares.setVerifyInputWhenFocusTarget(false);
+        btnVerbosRegulares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerbosRegularesActionPerformed(evt);
+            }
+        });
         jPanelUno.add(btnVerbosRegulares);
 
         btnVerbosIregulares.setText("Verbos irregulares");
@@ -62,6 +70,12 @@ public class VentanaUno extends javax.swing.JFrame {
     private void btnVerbosIregularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerbosIregularesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerbosIregularesActionPerformed
+
+    private void btnVerbosRegularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerbosRegularesActionPerformed
+        VentanaDos ventana = new VentanaDos();
+        ventana.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVerbosRegularesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -473,6 +473,7 @@ public class VentanaAudioImagenBeta extends JFrame{
                 VentanaAcierto ventana = new VentanaAcierto(new JFrame(),true);
                 ventana.setVisible(true);
                 dispose();
+                
             }
             else
             {

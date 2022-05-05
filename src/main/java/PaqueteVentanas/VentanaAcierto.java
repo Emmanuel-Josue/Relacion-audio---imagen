@@ -18,20 +18,18 @@ import javax.swing.JPanel;
 
 public class VentanaAcierto extends JDialog{
     
-    JPanel panelPrincipal;
-    JPanel panelEtiquetaAcierto;
-    JPanel panelBotones;
-    JButton btnSalir;
-    JButton btnEstadistica;
-    JButton btnSiguiente;
-    private JButton btnReforzar;
+    private JPanel panelPrincipal;
+    private JPanel panelEtiquetaAcierto;
+    private JPanel panelBotones;
+    private JButton btnSalir;
+    private JButton btnSiguiente;
     private JLabel lblAcierto;
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
         super(parent, modal);//volver a investigar esta linea. 
         setSize(600,300);
-        //setLocationRelativeTo(null);// Centramos la ventana 
+        setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
         iniciarComponentes();
     }  
@@ -53,9 +51,9 @@ public class VentanaAcierto extends JDialog{
     public void panelEtiquetaAcierto()
     {
         panelEtiquetaAcierto = new JPanel();
-        panelEtiquetaAcierto.setBackground(Color.WHITE);
+        panelEtiquetaAcierto.setBackground(Color.BLACK);
         panelEtiquetaAcierto.setLayout(new BorderLayout());
-        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes para el proyecto\\correcto1.jpg"));
+        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes para el proyecto\\Correcto3.jpg"));
         panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }
@@ -63,15 +61,12 @@ public class VentanaAcierto extends JDialog{
     public void panelBotones()
     {
         panelBotones = new JPanel();
-        panelBotones.setBackground(Color.WHITE);
+        panelBotones.setBackground(Color.BLACK);
         btnSalir = new JButton("Salir");
-        btnEstadistica = new JButton("Estadistica");
         btnSiguiente = new JButton("SIGUIENTE");
-        btnReforzar = new JButton("Reforzar");
+        
         
         panelBotones.add(btnSalir);
-        panelBotones.add(btnReforzar);
-        panelBotones.add(btnEstadistica);
         panelBotones.add(btnSiguiente);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
