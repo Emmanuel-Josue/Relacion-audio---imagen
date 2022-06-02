@@ -87,12 +87,12 @@ public class VentanaAudioImagenBeta extends JFrame{
     private Acciones objetoAcciones = new Acciones();
     private Archivo objetoArchivo = new Archivo();
     
-    private File archivoImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de imagenes.txt");
-    private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\Archivo con rutas de audios.txt");
-    private File archivoRespuestaCorrecta = new File("Archivo con respuesta correcta.txt");
+    private File archivoImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con rutas de imagenes.txt");
+    private File archivoAudio = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con rutas de audios.txt");
+    private File archivoRespuestaCorrecta = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con respuesta correcta.txt");
     
-    private File archivoTresRutasImagenes = new File("Archivo con ultimas rutas de imagenes.txt");
-    private File archivoTresRutasAudios = new File("Archivo con ultimas rutas de audios.txt");
+    private File archivoTresRutasImagenes = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con ultimas rutas de imagenes.txt");
+    private File archivoTresRutasAudios = new File("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con ultimas rutas de audios.txt");
     
     public VentanaAudioImagenBeta(boolean verdaderoFalso)
     {
@@ -253,8 +253,8 @@ public class VentanaAudioImagenBeta extends JFrame{
         System.out.println("----------------------asignacionRutasAbsolutas(MÉTODO DOS)----------------------------");
         //generamos un número aleatorio, el cual decidira que número(ruta) se va a reemplazar. 
         numeroAleatorioACambiar = objetoAcciones.numeroAleatorio(4);      
-        rutaImagen = obtencionRuta("Archivo con ultimas rutas de imagenes.txt",archivoTresRutasImagenes);
-        rutaAudio = obtencionRuta("Archivo con ultimas rutas de audios.txt",archivoTresRutasAudios);//creo que el problama esta aqui, pero no lo puedeo detectasr 
+        rutaImagen = obtencionRuta("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con ultimas rutas de imagenes.txt",archivoTresRutasImagenes);
+        rutaAudio = obtencionRuta("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Archivos\\Archivo con ultimas rutas de audios.txt",archivoTresRutasAudios);//creo que el problama esta aqui, pero no lo puedeo detectasr 
         cuatroNumerosAleatorios = objetoAcciones.arregloNumeroAleatorio(67);
         rellenarColeccion(copiaImagenes, objetoAcciones.coleccionImagenes(), cuatroNumerosAleatorios);
         rellenarColeccion(copiaAudio, objetoAcciones.coleccionAudio(), cuatroNumerosAleatorios);
