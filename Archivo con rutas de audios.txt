@@ -1,3 +1,5 @@
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\29 LIKE.wav
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\19 START.wav
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\24 WAIT.wav
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\1 OPEN.wav
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\2 ACCEPT.wav
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\3 LOVE.wav
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\4 LEARN.wav
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Audio verbos regulares WAV\6 DARE.wav
