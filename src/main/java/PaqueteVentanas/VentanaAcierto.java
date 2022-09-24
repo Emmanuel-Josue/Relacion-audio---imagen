@@ -93,6 +93,7 @@ public class VentanaAcierto extends JDialog{
                 
                 VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta(false);
                 ventana.setVisible(true);
+                
                 dispose();
 
 
