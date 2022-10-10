@@ -3,6 +3,7 @@ C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAud
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\3 love.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\4 learn.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\5 hurry.png
+C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\6 dare.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\7 help.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\8 dance.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\9 erase.png
@@ -10,7 +11,6 @@ C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAud
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\11 walk.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\12 close.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\13 date.png
-C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\14 cook.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\15 consider.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\16 count.png
 C:\Users\user01\Desktop\Emmanuel\UAEMEX\CURSO LOGICA DE PROGRAMACION\RelacionAudioImagen\src\Recursos\Imagenes verbos regulares\17 Answer.png
