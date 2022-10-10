@@ -25,19 +25,7 @@ public class Principal {
         VentanaDos ventana = new VentanaDos();
         ventana.setVisible(true);
         
-       
-
-
-        
-        /*
-        VentanaAudioImagen objetoAudioImagen = new VentanaAudioImagen();
-        objetoAudioImagen.setVisible(true);
-        */
-        
-        /*
-        VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta();
-        ventana.setVisible(true);
-       */
+ //Proyecto correcto
     }
     
 }
