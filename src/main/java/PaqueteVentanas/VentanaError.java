@@ -1,51 +1,52 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package PaqueteVentanas;
 
-import PaqueteUno.Archivo;
+import Codigo.Audio;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author user01
- */
-public class VentanaError extends JDialog{
-    
-    JPanel panelPrincipal;
-    JPanel panelEtiquetaError;
-    JPanel panelBotones;
-    JButton btnSalir;
-    JButton btnVerRespuesta;
-    JButton btnRepetir;
+public class VentanaError extends JDialog {
+    private JPanel panelPrincipal;
+    private JPanel panelEtiquetaError;
+    private JPanel panelBotones;
+    private JButton btnSalir;
+    private JButton btnRepetir;
     private String rutaAudio;
+    private JLabel lblError;
+    private Audio reproducir = new Audio();
+    private String repetir;            
     
-    private Archivo objetoArchivo =new Archivo();
-    private VentanaAudioImagenBeta objetoVentanaBeta = new VentanaAudioImagenBeta();
-    
-    public VentanaError(Frame parent, boolean modal)
+    public VentanaError(Frame parent, boolean modal, String repetir)
     {
         super(parent, modal);//volver a investigar esta linea. 
+        this.repetir = repetir;
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
         iniciarComponentes();
     }
     
-    public void iniciarComponentes()
+        //--------------------------------------- IMPLEMENTACIÓN --------------------------------------  
+    private void iniciarComponentes()
     {
         panelPrincipal();
         panelEtiquetaError();
         panelBotones();
     }
     
-    public void panelPrincipal()
+    private void panelPrincipal()
     {
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BorderLayout());//Investigar como funciona el border layout, colocar los siguientes paneles anto arriba como abajao center y este 
@@ -53,31 +54,31 @@ public class VentanaError extends JDialog{
         this.add(panelPrincipal);
     }
     
-    public void panelEtiquetaError()
+    private void panelEtiquetaError()
     {
         panelEtiquetaError = new JPanel();
-        panelEtiquetaError.setBackground(Color.GREEN);
+        panelEtiquetaError.setBackground(Color.black);
+        panelEtiquetaError.setLayout(new BorderLayout());
+        lblError = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Error.jpg"));
+        panelEtiquetaError.add(lblError, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaError, BorderLayout.CENTER);
     }
     
-    public void panelBotones()
+    private void panelBotones()
     {
         panelBotones = new JPanel();
         panelBotones.setBackground(Color.BLACK);
         btnSalir = new JButton("Salir");
-        btnVerRespuesta = new JButton("Ver respuesta");
         btnRepetir = new JButton("¡ REINTENTAR !");
         
         panelBotones.add(btnSalir);
-        panelBotones.add(btnVerRespuesta);
         panelBotones.add(btnRepetir);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
         oyenteAccionBotonSalir();
         oyenteAccionBotonRepetir();
-        oyenteAccionBotonVerRespuesta();
     }
-    public void oyenteAccionBotonSalir()
+    private void oyenteAccionBotonSalir()
     {
         ActionListener oyente = new ActionListener()
         {
@@ -89,7 +90,7 @@ public class VentanaError extends JDialog{
         };
         btnSalir.addActionListener(oyente);
     }
-    public void oyenteAccionBotonRepetir()
+    private void oyenteAccionBotonRepetir()
     {
         //En este método se trabajara un poco más ya que cada vez 
         //que se repita alguna pregunta se contabilizara 
@@ -101,27 +102,11 @@ public class VentanaError extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                rutaAudio = objetoArchivo.leerArachivo("Archivo con respuesta correcta.txt", false);
-                objetoVentanaBeta.reproducirAudio(rutaAudio);
+                reproducir.reproducirAudio(repetir);
                 dispose();
             }
         };
         btnRepetir.addActionListener(oyente);
     
     }
-    public void oyenteAccionBotonVerRespuesta()
-    {
-        ActionListener oyente = new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            { 
-                //en este boton solamente abrire otra ventana. 
-                
-            }
-        };
-        btnVerRespuesta.addActionListener(oyente);
-        
-    }
-    
 }

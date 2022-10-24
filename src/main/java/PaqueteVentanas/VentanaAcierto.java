@@ -1,6 +1,11 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package PaqueteVentanas;
 
+import Codigo.Archivo;
+import Codigo.Pregunta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,67 +16,62 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class VentanaAcierto extends JDialog{
     
-    JPanel panelPrincipal;
-    JPanel panelEtiquetaAcierto;
-    JPanel panelBotones;
-    JButton btnSalir;
-    JButton btnEstadistica;
-    JButton btnSiguiente;
-    private JButton btnReforzar;
-    private JLabel lblAcierto;
+    private JPanel panelPrincipal;
+    private JPanel panelEtiquetaAcierto;
+    private JPanel panelBotones;
+    private JButton btnSalir;
+    private JButton btnSiguiente;
+    private JLabel lblAcierto; 
+    private Archivo archivista = new Archivo();
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
         super(parent, modal);//volver a investigar esta linea. 
         setSize(600,300);
-        //setLocationRelativeTo(null);// Centramos la ventana 
+        setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
         iniciarComponentes();
     }  
-    public void iniciarComponentes()
+    
+    //--------------------------------------- IMPLEMENTACIÓN --------------------------------------    
+    private void iniciarComponentes()
     {
         panelPrincipal();
         panelEtiquetaAcierto();
         panelBotones();
     }
     
-    public void panelPrincipal()
+    private void panelPrincipal()
     {
         panelPrincipal = new JPanel();
-        panelPrincipal.setLayout(new BorderLayout());//Investigar como funciona el border layout, colocar los siguientes paneles anto arriba como abajao center y este 
+        panelPrincipal.setLayout(new BorderLayout());
         panelPrincipal.setBackground(Color.red);
         this.add(panelPrincipal);
     }
     
-    public void panelEtiquetaAcierto()
+    private void panelEtiquetaAcierto()
     {
         panelEtiquetaAcierto = new JPanel();
-        panelEtiquetaAcierto.setBackground(Color.WHITE);
+        panelEtiquetaAcierto.setBackground(Color.black);
         panelEtiquetaAcierto.setLayout(new BorderLayout());
-        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\Recursos\\Imagenes para el proyecto\\correcto1.jpg"));
+        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Correcto3.jpg"));
         panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }
     
-    public void panelBotones()
+    private void panelBotones()
     {
         panelBotones = new JPanel();
-        panelBotones.setBackground(Color.WHITE);
+        panelBotones.setBackground(Color.BLACK);
         btnSalir = new JButton("Salir");
-        btnEstadistica = new JButton("Estadistica");
         btnSiguiente = new JButton("SIGUIENTE");
-        btnReforzar = new JButton("Reforzar");
         
         panelBotones.add(btnSalir);
-        panelBotones.add(btnReforzar);
-        panelBotones.add(btnEstadistica);
         panelBotones.add(btnSiguiente);
         
         panelPrincipal.add(panelBotones, BorderLayout.PAGE_END);
@@ -80,32 +80,32 @@ public class VentanaAcierto extends JDialog{
     }
     
     
-    public void oyenteAccionBotonSiguiente()
+    private void oyenteAccionBotonSiguiente()
     {
-        System.out.println("ME EJECUTO YO EL OYENTE DE ACCIÓN");
         ActionListener oyente = new ActionListener()
-        {
+        {           
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                /*
-                Con estas 3 lineas el programa realiza las funciones basiscas que quiero que haga 
-                la cuestion es que me pregunto si existira un problema en que cada vez que ponga en marcha 
-                este oyente se creé un objeto, ¿Qué es lo que pasa con los anterires objetos que se han creado ?
-                ¿ Pueden existir dos objetos de la misma clase con el mismo nombre?
-                ¿Por qué la primera ventana no se cierra sino hasta que se cierra esta se cierra la primera ?
-                */
+                Pregunta oPregunta = archivista.leerBinario("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Archivos\\Archivo Binario");
+                if(oPregunta.getOImagen().getImagenes().size() != 0)
+                {
+                    VentanaPregunta ventana = new VentanaPregunta(oPregunta);
+                    ventana.setVisible(true);
+                    dispose();
+                }
                 
-                VentanaAudioImagenBeta ventana = new VentanaAudioImagenBeta(false);
-                ventana.setVisible(true);
-                dispose();
+                else
+                {
+                    System.exit(0);
+                }
 
 
             }
         };
         btnSiguiente.addActionListener(oyente);
     }
-    public void oyenteAccionBotonSalir()
+    private void oyenteAccionBotonSalir()
     {
         ActionListener oyente = new ActionListener()
         {
@@ -117,8 +117,5 @@ public class VentanaAcierto extends JDialog{
         };
         btnSalir.addActionListener(oyente);
     }
-    
 
-
-    
 }
