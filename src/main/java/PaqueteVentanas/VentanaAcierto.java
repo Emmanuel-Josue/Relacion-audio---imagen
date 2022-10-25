@@ -5,6 +5,7 @@
 package PaqueteVentanas;
 
 import Codigo.Archivo;
+import Codigo.Operacion;
 import Codigo.Pregunta;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,6 +29,9 @@ public class VentanaAcierto extends JDialog{
     private JButton btnSiguiente;
     private JLabel lblAcierto; 
     private Archivo archivista = new Archivo();
+    private File rutaAbsoluta;
+    private String ruta;
+    private Operacion operacional;
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -35,6 +39,11 @@ public class VentanaAcierto extends JDialog{
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+        rutaAbsoluta = new File("Correcto3.jpg");
+        operacional = new Operacion();
+//        ruta = rutaAbsoluta.getAbsolutePath();
+//        System.out.println("La ruta es: " + ruta);
+//        System.out.println("La ruta or: " + "C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Correcto3.jpg");
         iniciarComponentes();
     }  
     
@@ -44,6 +53,7 @@ public class VentanaAcierto extends JDialog{
         panelPrincipal();
         panelEtiquetaAcierto();
         panelBotones();
+        
     }
     
     private void panelPrincipal()
@@ -59,7 +69,7 @@ public class VentanaAcierto extends JDialog{
         panelEtiquetaAcierto = new JPanel();
         panelEtiquetaAcierto.setBackground(Color.black);
         panelEtiquetaAcierto.setLayout(new BorderLayout());
-        lblAcierto = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Correcto3.jpg"));
+        lblAcierto = new JLabel(new ImageIcon(operacional.establecerRuta(rutaAbsoluta)));
         panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }

@@ -1,6 +1,7 @@
 
 package Codigo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -113,6 +114,20 @@ public class Operacion {
         {
             coleccion.set(posicionRespuesta, rutaRespuesta);
         }
+    }
+    public String establecerRuta(File archivo)
+    {
+        String ruta;
+        int posicion;
+        int longitudDeNombre;
+        int longitudDeRuta;
+        ruta = archivo.getPath();
+        longitudDeNombre = ruta.length();
+        ruta = archivo.getAbsolutePath();
+        longitudDeRuta = ruta.length();
+        posicion = longitudDeRuta - longitudDeNombre;
+        ruta = ruta.substring(0, posicion) + "src\\main\\java\\Recursos\\Imagenes para el proyecto\\" + ruta.substring(posicion);
+        return ruta;
     }
                  
     //--------------------------------------- IMPLEMENTACIÓN --------------------------------------

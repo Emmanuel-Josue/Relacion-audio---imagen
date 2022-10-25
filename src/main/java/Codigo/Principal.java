@@ -13,6 +13,7 @@ public class Principal {
 
         VentanaPregunta ventanaInicial = new VentanaPregunta();
         ventanaInicial.setVisible(true);
+        
 
 
     }
