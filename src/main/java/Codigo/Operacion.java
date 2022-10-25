@@ -5,15 +5,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Operacion {
+public class Operacion{
     
     private Random aleatorio;
     private Archivo archivista;
+    private File archivoBinario;
+    private String rutaEnDondeSeCrearaElArchivo;
     
     public Operacion()
     {
         aleatorio = new Random();
         archivista = new Archivo();
+        archivoBinario = new File("Archivos");//Para poder crear el archivo archivoBinario.bin en el lugar adecuado
+        rutaEnDondeSeCrearaElArchivo = establecerRuta(archivoBinario,"src\\main\\java\\Recursos\\", false)+ "\\Archivo Binario.bin";
     }
     
     // Creo que este algoritmo se puede mejorar cambiando los bucles While por 
@@ -71,9 +75,10 @@ public class Operacion {
         boolean respuesta;
         if(numeroRespuesta == numeroElegido)           
         {
+            
             //Se eliminan los elementos de esta pregunta para que no sean repetidos en el resto del programa. 
             this.eliminarRespuesta(oPregunta, numeroRespuesta);
-            archivista.escribirBinario(oPregunta);
+            archivista.escribirBinario(oPregunta, rutaEnDondeSeCrearaElArchivo);
             respuesta = true;                     
         }
         else
@@ -115,18 +120,20 @@ public class Operacion {
             coleccion.set(posicionRespuesta, rutaRespuesta);
         }
     }
-    public String establecerRuta(File archivo)
+    public String establecerRuta(File archivo, String parteFaltante, boolean cadenaGenrerica)
     {
         String ruta;
-        int posicion;
-        int longitudDeNombre;
-        int longitudDeRuta;
-        ruta = archivo.getPath();
-        longitudDeNombre = ruta.length();
+        int posicion = obteniendoPosicion(archivo);
         ruta = archivo.getAbsolutePath();
-        longitudDeRuta = ruta.length();
-        posicion = longitudDeRuta - longitudDeNombre;
-        ruta = ruta.substring(0, posicion) + "src\\main\\java\\Recursos\\Imagenes para el proyecto\\" + ruta.substring(posicion);
+        if (cadenaGenrerica) 
+        {
+            ruta = ruta.substring(0, posicion) + parteFaltante;
+        }
+        else
+        {
+            ruta = ruta.substring(0, posicion) + parteFaltante + ruta.substring(posicion);
+        }
+        
         return ruta;
     }
                  
@@ -161,4 +168,18 @@ public class Operacion {
         
     }
     
+    //Nos entregara la posicion en donde debemos insertar la parte faltante de la ruta
+    private int obteniendoPosicion(File archivo)
+    {
+        String ruta;
+        int posicion;
+        int longitudDeNombre;
+        int longitudDeRuta;
+        ruta = archivo.getPath();
+        longitudDeNombre = ruta.length();
+        ruta = archivo.getAbsolutePath();
+        longitudDeRuta = ruta.length();
+        posicion = longitudDeRuta - longitudDeNombre;
+        return posicion;
+    }
 }

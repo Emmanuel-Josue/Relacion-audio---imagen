@@ -29,9 +29,11 @@ public class VentanaAcierto extends JDialog{
     private JButton btnSiguiente;
     private JLabel lblAcierto; 
     private Archivo archivista = new Archivo();
-    private File rutaAbsoluta;
-    private String ruta;
+    private File rutaArchivo;
+    private File rutaArchivoBinario;
     private Operacion operacional;
+    private String complementoRuta;
+    private String complementoRutaBinario;
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -39,11 +41,11 @@ public class VentanaAcierto extends JDialog{
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
-        rutaAbsoluta = new File("Correcto3.jpg");
-        operacional = new Operacion();
-//        ruta = rutaAbsoluta.getAbsolutePath();
-//        System.out.println("La ruta es: " + ruta);
-//        System.out.println("La ruta or: " + "C:\\Users\\user01\\Desktop\\Emmanuel\\UAEMEX\\CURSO LOGICA DE PROGRAMACION\\RelacionAudioImagen\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Correcto3.jpg");
+        rutaArchivo = new File("Correcto3.jpg");//para poder obtener la ruta del archivo
+        operacional = new Operacion();//clase con la que obtendremos la ruta absoluta
+        complementoRuta = "src\\main\\java\\Recursos\\Imagenes para el proyecto\\";//Es la parte de la ruta que no nos entrega el método getAbsolutePath
+        rutaArchivoBinario = new File("Archivo Binario.bin");
+        complementoRutaBinario = "src\\main\\java\\Recursos\\Archivos\\";
         iniciarComponentes();
     }  
     
@@ -69,7 +71,7 @@ public class VentanaAcierto extends JDialog{
         panelEtiquetaAcierto = new JPanel();
         panelEtiquetaAcierto.setBackground(Color.black);
         panelEtiquetaAcierto.setLayout(new BorderLayout());
-        lblAcierto = new JLabel(new ImageIcon(operacional.establecerRuta(rutaAbsoluta)));
+        lblAcierto = new JLabel(new ImageIcon(operacional.establecerRuta(rutaArchivo, complementoRuta, false)));
         panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }
@@ -97,7 +99,7 @@ public class VentanaAcierto extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Pregunta oPregunta = archivista.leerBinario("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Archivos\\Archivo Binario");
+                Pregunta oPregunta = archivista.leerBinario(operacional.establecerRuta(rutaArchivoBinario, complementoRutaBinario, false));
                 if(oPregunta.getOImagen().getImagenes().size() != 0)
                 {
                     VentanaPregunta ventana = new VentanaPregunta(oPregunta);

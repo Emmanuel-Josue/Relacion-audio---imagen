@@ -27,11 +27,11 @@ public class Archivo {
     {
         coleccion = new ArrayList();
     }    
-    public void escribirBinario(Object objetoAGuardar)
+    public void escribirBinario(Object objetoAGuardar, String lugarDeCreacion)
     {
         try
         {
-            FileOutputStream archivo = new FileOutputStream("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Archivos\\Archivo Binario.bin");
+            FileOutputStream archivo = new FileOutputStream(lugarDeCreacion);
             ObjectOutputStream escritura = new ObjectOutputStream(archivo);
 
             escritura.writeObject(objetoAGuardar);

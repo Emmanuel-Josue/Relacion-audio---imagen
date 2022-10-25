@@ -13,11 +13,11 @@ public class Pregunta implements Serializable{
     private Audio OAudio;
     
     //----------------------------INTERFACE-----------------------------
-    public Pregunta()
+    public Pregunta(String rutaImagen,String rutaAudio)
     {
         //En este punto el objeto ya debe de contar con elementos en su colección 
-        OImagen = new Imagen("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Imagenes verbos regulares\\");
-        OAudio = new Audio("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Audio verbos regulares WAV\\");
+        OImagen = new Imagen(rutaImagen);
+        OAudio = new Audio(rutaAudio);
     }
 
     public Imagen getOImagen() {

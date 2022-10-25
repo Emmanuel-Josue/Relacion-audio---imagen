@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -42,16 +43,20 @@ public class VentanaPregunta extends JFrame{
     private int[] cuatroNumerosAleatorios;
     private Operacion oOperacion;
     int numeroRespuesta;
+    private File rutaArchivoImagen;
     //Este será mi primer constructor
     public VentanaPregunta()
     {
         setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         setLocationRelativeTo(null);// Centramos la ventana 
-        setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
-        oPregunta = new Pregunta();// Con esto ya puedo disponer de las rutas de imagenes y audios. 
-        cuatroNumerosAleatorios = new int[4];//para controlar las rutas que iran en los botones.
+        setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra
         oOperacion = new Operacion();
+        rutaArchivoImagen = new File("1 open.png");//Este String se toma de muestra, puede ser cualquiera que exista en la carpeta en donde reciden todos los elementos a utilizar
+        String rutaImagen = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Imagenes verbos regulares\\", true);
+        String rutaAudio = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Audio verbos regulares WAV\\", true);//ATENCIÓN
+        oPregunta = new Pregunta(rutaImagen, rutaAudio);// Con esto ya puedo disponer de las rutas de imagenes y audios. 
+        cuatroNumerosAleatorios = new int[4];//para controlar las rutas que iran en los botones.
         this.iniciarComponenetes();
     }
     //Ya que los constructores se utilizan para inicializar cosas, este inicializara con 
@@ -78,7 +83,11 @@ public class VentanaPregunta extends JFrame{
         panelImagenes();
         if(oPregunta.getOImagen().getImagenes().size() <= 3)
         {
-            Pregunta rutas = new Pregunta();
+            //Las siguientes 3 lineas se repiten en el primer constructor
+            rutaArchivoImagen = new File("1 open.png");//Este String se toma de muestra, puede ser cualquiera que exista en la carpeta en donde reciden todos los elementos a utilizar
+            String rutaImagen = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Imagenes verbos regulares\\", true);
+            String rutaAudio = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Audio verbos regulares WAV\\", true);//ATENCIÓN
+            Pregunta rutas = new Pregunta(rutaImagen, rutaAudio);
             crearSeñuelos((rutas.getOImagen().getImagenes().size()));//El número debe de ser acorde al total de elementos en las listas. 
             int indice = elegirIndiceRespuesta();
             int posicionDuplicada = oOperacion.rutaDuplicada(rutas.getOImagen().getImagenes(), (String) oPregunta.getOImagen().getImagenes().get(0));            
