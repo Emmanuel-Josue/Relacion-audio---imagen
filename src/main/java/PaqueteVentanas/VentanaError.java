@@ -5,12 +5,14 @@
 package PaqueteVentanas;
 
 import Codigo.Audio;
+import Codigo.Operacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -23,10 +25,13 @@ public class VentanaError extends JDialog {
     private JPanel panelBotones;
     private JButton btnSalir;
     private JButton btnRepetir;
-    private String rutaAudio;
+    //private String rutaAudio;
     private JLabel lblError;
     private Audio reproducir = new Audio();
-    private String repetir;            
+    private String repetir;     
+    private File rutaImagenError;
+    private String rutaError;
+    private Operacion operacionError;
     
     public VentanaError(Frame parent, boolean modal, String repetir)
     {
@@ -35,7 +40,13 @@ public class VentanaError extends JDialog {
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+        
+        operacionError = new Operacion();
+        rutaImagenError = new File("Error.jpg");
+        rutaError = operacionError.establecerRuta(rutaImagenError,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);
+        System.out.println(rutaError);
         iniciarComponentes();
+        
     }
     
         //--------------------------------------- IMPLEMENTACIÓN --------------------------------------  
@@ -59,7 +70,7 @@ public class VentanaError extends JDialog {
         panelEtiquetaError = new JPanel();
         panelEtiquetaError.setBackground(Color.black);
         panelEtiquetaError.setLayout(new BorderLayout());
-        lblError = new JLabel(new ImageIcon("C:\\Users\\user01\\Desktop\\Emmanuel\\Programacion\\JAVA\\Palabra_Imagen_Ingles\\src\\main\\java\\Recursos\\Imagenes para el proyecto\\Error.jpg"));
+        lblError = new JLabel(new ImageIcon(rutaError));
         panelEtiquetaError.add(lblError, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaError, BorderLayout.CENTER);
     }
