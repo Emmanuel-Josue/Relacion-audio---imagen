@@ -32,8 +32,8 @@ public class VentanaAcierto extends JDialog{
     private File rutaArchivo;
     private File rutaArchivoBinario;
     private Operacion operacional;
-    private String complementoRuta;
-    private String complementoRutaBinario;
+    private String rutaComplataImagenAcierto;
+    private String rutaCompletaArchivoBinario;
 
     public VentanaAcierto(Frame parent, boolean modal)
     {
@@ -42,10 +42,10 @@ public class VentanaAcierto extends JDialog{
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
         rutaArchivo = new File("Correcto3.jpg");//para poder obtener la ruta del archivo
-        operacional = new Operacion();//clase con la que obtendremos la ruta absoluta
-        complementoRuta = "src\\main\\java\\Recursos\\Imagenes para el proyecto\\";//Es la parte de la ruta que no nos entrega el método getAbsolutePath
         rutaArchivoBinario = new File("Archivo Binario.bin");
-        complementoRutaBinario = "src\\main\\java\\Recursos\\Archivos\\";
+        operacional = new Operacion();//clase con la que obtendremos la ruta absoluta
+        rutaComplataImagenAcierto = operacional.establecerRuta(rutaArchivo,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);
+        rutaCompletaArchivoBinario = operacional.establecerRuta(rutaArchivoBinario,"src\\main\\java\\Recursos\\Archivos\\", false);
         iniciarComponentes();
     }  
     
@@ -71,7 +71,7 @@ public class VentanaAcierto extends JDialog{
         panelEtiquetaAcierto = new JPanel();
         panelEtiquetaAcierto.setBackground(Color.black);
         panelEtiquetaAcierto.setLayout(new BorderLayout());
-        lblAcierto = new JLabel(new ImageIcon(operacional.establecerRuta(rutaArchivo, complementoRuta, false)));
+        lblAcierto = new JLabel(new ImageIcon(rutaComplataImagenAcierto));
         panelEtiquetaAcierto.add(lblAcierto, BorderLayout.CENTER);
         panelPrincipal.add(panelEtiquetaAcierto, BorderLayout.CENTER);
     }
@@ -99,7 +99,7 @@ public class VentanaAcierto extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Pregunta oPregunta = archivista.leerBinario(operacional.establecerRuta(rutaArchivoBinario, complementoRutaBinario, false));
+                Pregunta oPregunta = archivista.leerBinario(rutaCompletaArchivoBinario);
                 if(oPregunta.getOImagen().getImagenes().size() != 0)
                 {
                     VentanaPregunta ventana = new VentanaPregunta(oPregunta);

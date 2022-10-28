@@ -43,7 +43,11 @@ public class VentanaPregunta extends JFrame{
     private int[] cuatroNumerosAleatorios;
     private Operacion oOperacion;
     int numeroRespuesta;
-    private File rutaArchivoImagen;
+    private File archivoParaObjetoPregunta;
+    private File archivoParaImagenAudio;
+    private String rutaParaObjetoPregutnaImagen;
+    private String rutaParaObjetoPregutnaAudio;
+    private String rutaImagenAudio;
     //Este será mi primer constructor
     public VentanaPregunta()
     {
@@ -52,10 +56,8 @@ public class VentanaPregunta extends JFrame{
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra
         oOperacion = new Operacion();
-        rutaArchivoImagen = new File("1 open.png");//Este String se toma de muestra, puede ser cualquiera que exista en la carpeta en donde reciden todos los elementos a utilizar
-        String rutaImagen = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Imagenes verbos regulares\\", true);
-        String rutaAudio = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Audio verbos regulares WAV\\", true);//ATENCIÓN
-        oPregunta = new Pregunta(rutaImagen, rutaAudio);// Con esto ya puedo disponer de las rutas de imagenes y audios. 
+        this.obtenerRutasCompletas();
+        oPregunta = new Pregunta(rutaParaObjetoPregutnaImagen, rutaParaObjetoPregutnaAudio);// Con esto ya puedo disponer de las rutas de imagenes y audios. 
         cuatroNumerosAleatorios = new int[4];//para controlar las rutas que iran en los botones.
         this.iniciarComponenetes();
     }
@@ -67,9 +69,10 @@ public class VentanaPregunta extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+        oOperacion = new Operacion();
+        this.obtenerRutasCompletas();
         this.oPregunta = OPregunta;
         cuatroNumerosAleatorios = new int[4];//para controlar las rutas que iran en los botones
-        oOperacion = new Operacion();
         this.iniciarComponenetes();
 //        this.iniciarComponenetes(OPregunta);
     }
@@ -83,11 +86,7 @@ public class VentanaPregunta extends JFrame{
         panelImagenes();
         if(oPregunta.getOImagen().getImagenes().size() <= 3)
         {
-            //Las siguientes 3 lineas se repiten en el primer constructor
-            rutaArchivoImagen = new File("1 open.png");//Este String se toma de muestra, puede ser cualquiera que exista en la carpeta en donde reciden todos los elementos a utilizar
-            String rutaImagen = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Imagenes verbos regulares\\", true);
-            String rutaAudio = oOperacion.establecerRuta(rutaArchivoImagen,"src\\main\\java\\Recursos\\Audio verbos regulares WAV\\", true);//ATENCIÓN
-            Pregunta rutas = new Pregunta(rutaImagen, rutaAudio);
+            Pregunta rutas = new Pregunta(rutaParaObjetoPregutnaImagen, rutaParaObjetoPregutnaAudio);
             crearSeñuelos((rutas.getOImagen().getImagenes().size()));//El número debe de ser acorde al total de elementos en las listas. 
             int indice = elegirIndiceRespuesta();
             int posicionDuplicada = oOperacion.rutaDuplicada(rutas.getOImagen().getImagenes(), (String) oPregunta.getOImagen().getImagenes().get(0));            
@@ -298,5 +297,15 @@ public class VentanaPregunta extends JFrame{
         return indiceRespuesta = oOperacion.numeroAleatorio(3);   
     }
     
+    //Se obtendran las rutas que son necesarias para el programa como las imgenes y los archos de alamacenamiento de objetos. 
+    private void obtenerRutasCompletas()
+    {
+        archivoParaObjetoPregunta = new File("1 open.png");//Este String se toma de muestra, puede ser cualquiera que exista en la carpeta en donde reciden todos los elementos a utilizar
+        archivoParaImagenAudio = new File("audio_4.PNG");
+        rutaParaObjetoPregutnaImagen = oOperacion.establecerRuta(archivoParaObjetoPregunta,"src\\main\\java\\Recursos\\Imagenes verbos regulares\\", true);
+        rutaParaObjetoPregutnaAudio = oOperacion.establecerRuta(archivoParaObjetoPregunta,"src\\main\\java\\Recursos\\Audio verbos regulares WAV\\", true);
+        rutaImagenAudio = oOperacion.establecerRuta(archivoParaImagenAudio,"src\\Recursos\\Imagenes para el proyecto\\", false);
+               
+    }
     
 }

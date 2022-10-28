@@ -43,7 +43,7 @@ public class VentanaError extends JDialog {
         
         operacionError = new Operacion();
         rutaImagenError = new File("Error.jpg");
-        rutaError = operacionError.establecerRuta(rutaImagenError,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);
+        rutaError = operacionError.establecerRuta(rutaImagenError,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);//Se completa la ruta 
         System.out.println(rutaError);
         iniciarComponentes();
         
