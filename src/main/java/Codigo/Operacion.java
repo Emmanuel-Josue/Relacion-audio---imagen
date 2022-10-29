@@ -25,8 +25,6 @@ public class Operacion{
     // que se vuelva a obtener uno nuevo que no sea uno de los que ya se tienen. 
     public int[] arregloNumeroAleatorio(int rangoNumeros)
     {
-        System.out.println("----------------------arregloNumeroAleatorio()----------------------------");
-        
         //el largo es cuatro porque es la cantidad de elementos que se necesita
         int [] arregloN=new int[4];
         int iterador=1;
@@ -34,13 +32,10 @@ public class Operacion{
         //caso el rango es de 0-6, son 7 números en este rango 
         arregloN[0]=aleatorio.nextInt(rangoNumeros);
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);//REVISAR SI SI EL RANDO DE NUMEROS ABARCA TODO EL ARREGLO
-        System.out.println("Entran los bucles-----------<<<<<<<<<<<<");
-        System.out.println("---"+arregloN[0]);
         while(arregloN[0]==arregloN[iterador])
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         }
-        System.out.println("---"+arregloN[iterador]);
         ++iterador;
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
     
@@ -49,17 +44,12 @@ public class Operacion{
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         }
-        System.out.println("---"+arregloN[iterador]);
         ++iterador;
         arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
         while(arregloN[0]==arregloN[iterador] || arregloN[1]==arregloN[iterador] || arregloN[2]==arregloN[iterador])
         {
             arregloN[iterador]=aleatorio.nextInt(rangoNumeros);
-        }
-        System.out.println("---"+arregloN[iterador]);
-        
-        System.out.println("SALEN LOS BUCLES----------------------->>>>>>>>>>>>>>>>>>");
-    
+        }   
         return arregloN;
     }
 
@@ -76,7 +66,7 @@ public class Operacion{
         if(numeroRespuesta == numeroElegido)           
         {
             
-            //Se eliminan los elementos de esta pregunta para que no sean repetidos en el resto del programa. 
+            //Se eliminan el elemento de esta pregunta para que no sean repetidos en el resto del programa. 
             this.eliminarRespuesta(oPregunta, numeroRespuesta);
             archivista.escribirBinario(oPregunta, rutaEnDondeSeCrearaElArchivo);
             respuesta = true;                     

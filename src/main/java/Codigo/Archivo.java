@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public class Archivo {
     
-    private ArrayList coleccion; //Hay que inicializar esto. 
+    private ArrayList coleccion; 
        
     public Archivo()
     {

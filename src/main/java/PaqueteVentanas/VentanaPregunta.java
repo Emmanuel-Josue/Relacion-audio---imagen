@@ -74,7 +74,6 @@ public class VentanaPregunta extends JFrame{
         this.oPregunta = OPregunta;
         cuatroNumerosAleatorios = new int[4];//para controlar las rutas que iran en los botones
         this.iniciarComponenetes();
-//        this.iniciarComponenetes(OPregunta);
     }
     
         //--------------------------------------- IMPLEMENTACIÓN --------------------------------------  
@@ -173,7 +172,7 @@ public class VentanaPregunta extends JFrame{
         panelBotonAudio = new JPanel();
         panelBotonAudio.setBackground(Color.black);
         panelPrincipal.add(panelBotonAudio,BorderLayout.PAGE_END);
-       // panelBotonAudio
+      
     }
     
     private void botonAudio()
@@ -186,7 +185,6 @@ public class VentanaPregunta extends JFrame{
         btnAudio.setIcon(new ImageIcon(imagenBoton.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_DEFAULT)));
         panelBotonAudio.add(btnAudio);
         oPregunta.getOAudio().reproducirAudio(rutaAbsolutaAudio);
-//        reproducirAudio(rutaAbsolutaAudio);
         oyenteAccionBotonAudio();
         
     }
