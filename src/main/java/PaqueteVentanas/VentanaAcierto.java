@@ -29,8 +29,8 @@ public class VentanaAcierto extends JDialog{
     private JButton btnSiguiente;
     private JLabel lblAcierto; 
     private Archivo archivista = new Archivo();
-    private File rutaArchivo;
-    private File rutaArchivoBinario;
+    private File archivoImagenCorrecto;
+    private File archivoBinario;
     private Operacion operacional;
     private String rutaComplataImagenAcierto;
     private String rutaCompletaArchivoBinario;
@@ -41,11 +41,8 @@ public class VentanaAcierto extends JDialog{
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
-        rutaArchivo = new File("Correcto3.jpg");//para poder obtener la ruta del archivo
-        rutaArchivoBinario = new File("Archivo Binario.bin");
         operacional = new Operacion();//clase con la que obtendremos la ruta absoluta
-        rutaComplataImagenAcierto = operacional.establecerRuta(rutaArchivo,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);
-        rutaCompletaArchivoBinario = operacional.establecerRuta(rutaArchivoBinario,"src\\main\\java\\Recursos\\Archivos\\", false);
+        this.obtenerRutasCompletas();
         iniciarComponentes();
     }  
     
@@ -128,6 +125,17 @@ public class VentanaAcierto extends JDialog{
             }
         };
         btnSalir.addActionListener(oyente);
+    }
+    
+    public void obtenerRutasCompletas()
+    {
+        //asignar elementos a archivos
+        archivoImagenCorrecto = new File("Correcto3.jpg");//para poder obtener la ruta del archivo
+        archivoBinario = new File("Archivo Binario.bin");
+        
+        //Se obtiene la ruta completa
+        rutaComplataImagenAcierto = operacional.establecerRuta(archivoImagenCorrecto,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);
+        rutaCompletaArchivoBinario = operacional.establecerRuta(archivoBinario,"src\\main\\java\\Recursos\\Archivos\\", false);
     }
 
 }

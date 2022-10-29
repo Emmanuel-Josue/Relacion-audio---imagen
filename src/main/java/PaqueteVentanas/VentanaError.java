@@ -40,11 +40,8 @@ public class VentanaError extends JDialog {
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
-        
         operacionError = new Operacion();
-        rutaImagenError = new File("Error.jpg");
-        rutaError = operacionError.establecerRuta(rutaImagenError,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);//Se completa la ruta 
-        System.out.println(rutaError);
+        this.obtenerRutasCompletas();
         iniciarComponentes();
         
     }
@@ -119,5 +116,11 @@ public class VentanaError extends JDialog {
         };
         btnRepetir.addActionListener(oyente);
     
+    }
+    
+    public void obtenerRutasCompletas()
+    {
+        rutaImagenError = new File("Error.jpg");
+        rutaError = operacionError.establecerRuta(rutaImagenError,"src\\main\\java\\Recursos\\Imagenes para el proyecto\\", false);//Se completa la ruta 
     }
 }
