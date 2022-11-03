@@ -28,7 +28,7 @@ public class VentanaAcierto extends JDialog{
     private JButton btnSalir;
     private JButton btnSiguiente;
     private JLabel lblAcierto; 
-    private Archivo archivista = new Archivo();
+    private Archivo archivista;
     private File archivoImagenCorrecto;
     private File archivoBinario;
     private Operacion operacional;
@@ -41,6 +41,7 @@ public class VentanaAcierto extends JDialog{
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
         setMinimumSize(new Dimension(200,200));// tamaño minimo que tendra 
+        archivista = new Archivo();
         operacional = new Operacion();//clase con la que obtendremos la ruta absoluta
         this.obtenerRutasCompletas();
         iniciarComponentes();

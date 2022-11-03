@@ -27,7 +27,7 @@ public class VentanaError extends JDialog {
     private JButton btnRepetir;
     //private String rutaAudio;
     private JLabel lblError;
-    private Audio reproducir = new Audio();
+    private Audio reproducir;
     private String repetir;     
     private File rutaImagenError;
     private String rutaError;
@@ -36,6 +36,7 @@ public class VentanaError extends JDialog {
     public VentanaError(Frame parent, boolean modal, String repetir)
     {
         super(parent, modal);//volver a investigar esta linea. 
+        reproducir = new Audio();
         this.repetir = repetir;
         setSize(600,300);
         setLocationRelativeTo(null);// Centramos la ventana 
